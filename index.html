@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquiterm SpA | Consultoría Técnica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+    <!-- Hero Section -->
+    <header class="bg-slate-800 text-white py-16 px-6 text-center">
+        <h1 class="text-4xl font-bold mb-4">Arquiterm SpA</h1>
+        <p class="text-xl text-gray-300">Arquitectura, Tasaciones y Eficiencia Energética</p>
+    </header>
+
+    <!-- Formulario de Consulta Inteligente -->
+    <main class="max-w-4xl mx-auto my-12 p-8 bg-white shadow-lg rounded-lg">
+        <h2 class="text-2xl font-semibold mb-6 border-b pb-2">Configurador de Proyecto</h2>
+        
+        <!-- Netlify Forms detectará este formulario automáticamente -->
+        <form name="consultas-arquiterm" method="POST" data-netlify="true" class="space-y-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Ubicación para gastos de traslado -->
+                <div>
+                    <label class="block font-medium mb-1">Comuna del Proyecto</label>
+                    <input type="text" name="comuna" placeholder="Ej: Angol, Renaico, Concepción" class="w-full border p-2 rounded" required>
+                </div>
+
+                <!-- Tipo de Trámite -->
+                <div>
+                    <label class="block font-medium mb-1">Tipo de Trámite</label>
+                    <select name="tramite" id="tramite" class="w-full border p-2 rounded" onchange="toggleVivienda()">
+                        <option value="regularizacion">Regularización (Ley 20.898)</option>
+                        <option value="subdivision">Subdivisión (Urbana/Rural)</option>
+                        <option value="tasacion">Tasación Inmobiliaria/Agrícola</option>
+                        <option value="energia">Evaluación Energética (CEV)</option>
+                        <option value="diseno">Diseño de Vivienda Nueva</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Sección Condicional para Viviendas (Oculta por defecto) -->
+            <div id="seccion-vivienda" class="hidden bg-blue-50 p-6 rounded-lg border border-blue-200 space-y-4">
+                <h3 class="font-bold text-blue-800">Detalles del Diseño</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <input type="number" name="dormitorios" placeholder="Dormitorios" class="border p-2 rounded">
+                    <input type="number" name="banos" placeholder="Baños" class="border p-2 rounded">
+                    <select name="estilo" class="border p-2 rounded">
+                        <option>Moderno</option>
+                        <option>Mediterráneo</option>
+                        <option>Noruego/Marino</option>
+                    </select>
+                    <input type="text" name="presupuesto" placeholder="Presupuesto Est." class="border p-2 rounded">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-slate-800 text-white py-3 rounded-lg font-bold hover:bg-slate-700 transition">
+                Enviar para Pre-Factibilidad
+            </button>
+        </form>
+    </main>
+
+    <script>
+        function toggleVivienda() {
+            const tramite = document.getElementById('tramite').value;
+            const seccion = document.getElementById('seccion-vivienda');
+            if (tramite === 'diseno') {
+                seccion.classList.remove('hidden');
+            } else {
+                seccion.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
