@@ -11,17 +11,37 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--warm-white);color:var(--dark-grey);overflow-x:hidden;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5%;background:rgba(13,31,60,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(184,154,94,0.25);}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5%;background:rgba(13,31,60,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(184,154,94,.25);transition:padding .3s;}
+nav.scrolled{padding:.8rem 5%;}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--cream);letter-spacing:.08em;text-decoration:none;}
 .nav-logo span{color:var(--gold);}
 .nav-links{display:flex;gap:2rem;list-style:none;}
 .nav-links a{font-size:.72rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,240,232,.65);text-decoration:none;transition:color .2s;}
 .nav-links a:hover{color:var(--gold);}
-.nav-cta{background:var(--gold)!important;color:white!important;padding:.5rem 1.2rem;transition:background .2s!important;}
-.nav-cta:hover{background:var(--gold-light)!important;color:white!important;}
+.nav-cta{background:var(--gold)!important;color:white!important;padding:.5rem 1.2rem;}
+.nav-cta:hover{background:var(--gold-light)!important;}
 
-/* HERO */
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;z-index:210;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cream);transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-size:1.4rem;font-family:'Cormorant Garamond',serif;color:var(--cream);text-decoration:none;letter-spacing:.08em;transition:color .2s;}
+.mobile-menu a:hover{color:var(--gold);}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* ── HERO ── */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:4.5rem;position:relative;overflow:hidden;}
 .hero-left{background:var(--navy);display:flex;flex-direction:column;justify-content:center;padding:6rem 6% 5rem;position:relative;overflow:hidden;}
 .hero-left::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;}
@@ -32,13 +52,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .hero-title em{font-style:italic;color:var(--gold-light);}
 .hero-subtitle{font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.42);margin:.8rem 0 2rem;position:relative;z-index:2;animation:fadeUp .8s ease .38s both;}
 .hero-desc{font-size:.88rem;line-height:1.85;color:rgba(245,240,232,.68);max-width:370px;position:relative;z-index:2;font-weight:300;margin-bottom:2.5rem;animation:fadeUp .8s ease .48s both;}
-.hero-actions{display:flex;gap:1rem;position:relative;z-index:2;animation:fadeUp .8s ease .58s both;}
+.hero-actions{display:flex;gap:1rem;position:relative;z-index:2;animation:fadeUp .8s ease .58s both;flex-wrap:wrap;}
 .btn-primary{background:var(--gold);color:white;padding:.85rem 1.9rem;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:'Jost',sans-serif;transition:background .25s,transform .2s;display:inline-block;}
 .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
 .btn-outline{border:1px solid rgba(245,240,232,.25);color:var(--cream);padding:.85rem 1.9rem;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:'Jost',sans-serif;transition:all .25s;display:inline-block;}
 .btn-outline:hover{border-color:var(--gold);background:rgba(184,154,94,.1);}
-
-/* HERO RIGHT — image grid */
 .hero-right{position:relative;display:grid;grid-template-rows:1fr 1fr;overflow:hidden;}
 .hero-img-top,.hero-img-bottom{position:relative;overflow:hidden;}
 .hero-img-top{border-bottom:2px solid var(--gold);}
@@ -51,15 +69,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--gold);line-height:1;}
 .hero-stat-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-top:.25rem;}
 
-/* DIVIDER */
 .section-divider{height:4px;background:linear-gradient(90deg,var(--navy) 0%,var(--gold) 50%,var(--navy) 100%);}
-
-/* SECTION COMMONS */
 section{padding:6rem 5%;}
 .section-label{font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem;}
 .section-label::before{content:'';width:2rem;height:1px;background:var(--gold);}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.6rem);font-weight:300;line-height:1.15;color:var(--navy);margin-bottom:1.2rem;}
 .section-title em{font-style:italic;color:var(--gold);}
+
+/* GALLERY BAND */
+.gallery-band{display:grid;grid-template-columns:repeat(4,1fr);height:260px;overflow:hidden;}
+.gallery-cell{position:relative;overflow:hidden;}
+.gallery-cell img{width:100%;height:100%;object-fit:cover;filter:grayscale(25%);transition:transform .6s ease,filter .4s;}
+.gallery-cell:hover img{transform:scale(1.08);filter:grayscale(0);}
+.gallery-cell-overlay{position:absolute;inset:0;background:rgba(13,31,60,.35);transition:background .4s;}
+.gallery-cell:hover .gallery-cell-overlay{background:rgba(13,31,60,.1);}
 
 /* SERVICIOS */
 .services{background:var(--warm-white);}
@@ -73,7 +96,7 @@ section{padding:6rem 5%;}
 .service-card:hover .service-name,.service-card:hover .service-num{color:var(--cream);}
 .service-card:hover .service-desc,.service-card:hover .service-items li{color:rgba(245,240,232,.55);}
 .service-card:hover .svc-icon-wrap{border-color:rgba(184,154,94,.4);background:rgba(184,154,94,.08);}
-.service-card:hover .svc-icon-wrap svg path,.service-card:hover .svc-icon-wrap svg rect,.service-card:hover .svc-icon-wrap svg circle,.service-card:hover .svc-icon-wrap svg line,.service-card:hover .svc-icon-wrap svg polyline,.service-card:hover .svc-icon-wrap svg polygon{stroke:var(--gold);}
+.service-card:hover .svc-icon-wrap svg *{stroke:var(--gold);}
 .service-num{font-family:'Cormorant Garamond',serif;font-size:.82rem;color:var(--gold);opacity:.7;margin-bottom:1.2rem;letter-spacing:.1em;transition:color .35s;}
 .svc-icon-wrap{width:46px;height:46px;border:1px solid rgba(13,31,60,.12);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;transition:all .35s;}
 .svc-icon-wrap svg{width:24px;height:24px;}
@@ -82,14 +105,6 @@ section{padding:6rem 5%;}
 .service-items{list-style:none;}
 .service-items li{font-size:.75rem;color:var(--grey);padding:.28rem 0 .28rem 1rem;position:relative;transition:color .35s;}
 .service-items li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:.58rem;top:.35rem;}
-
-/* GALLERY BAND */
-.gallery-band{display:grid;grid-template-columns:repeat(4,1fr);height:260px;overflow:hidden;}
-.gallery-cell{position:relative;overflow:hidden;}
-.gallery-cell img{width:100%;height:100%;object-fit:cover;filter:grayscale(25%);transition:transform .6s ease,filter .4s;}
-.gallery-cell:hover img{transform:scale(1.08);filter:grayscale(0);}
-.gallery-cell-overlay{position:absolute;inset:0;background:rgba(13,31,60,.35);transition:background .4s;}
-.gallery-cell:hover .gallery-cell-overlay{background:rgba(13,31,60,.1);}
 
 /* ABOUT */
 .about{background:var(--navy);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;overflow:hidden;}
@@ -113,107 +128,132 @@ section{padding:6rem 5%;}
 .proceso-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3.5rem;position:relative;}
 .proceso-steps::before{content:'';position:absolute;top:1.4rem;left:12%;right:12%;height:1px;background:linear-gradient(90deg,var(--gold),rgba(184,154,94,.2));}
 .step{padding:0 1.8rem 2rem;position:relative;}
-.step-num{width:2.8rem;height:2.8rem;background:var(--navy);color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:.95rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;position:relative;z-index:2;}
+.step-num{width:2.8rem;height:2.8rem;background:var(--navy);color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:.95rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;position:relative;z-index:2;transition:transform .3s;}
+.step:hover .step-num{transform:scale(1.1);}
 .step-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--navy);margin-bottom:.45rem;}
 .step-desc{font-size:.76rem;line-height:1.72;color:var(--grey);font-weight:300;}
 
 /* ZONA TERMICA */
 .zona-termica{background:var(--navy);position:relative;overflow:hidden;}
 .zona-termica::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:48px 48px;}
-.zona-termica .section-label{position:relative;z-index:2;}
-.zona-termica .section-title{color:var(--cream);position:relative;z-index:2;}
+.zona-termica .section-label,.zona-termica .section-title{position:relative;z-index:2;}
+.zona-termica .section-title{color:var(--cream);}
 .zona-termica-desc{font-size:.85rem;line-height:1.8;color:rgba(245,240,232,.55);font-weight:300;max-width:520px;margin-bottom:3rem;position:relative;z-index:2;}
 .zt-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;position:relative;z-index:2;}
-.zt-selectors{display:flex;flex-direction:column;gap:1rem;}
+.zt-field{margin-bottom:1rem;}
 .zt-field label{display:block;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(184,154,94,.8);margin-bottom:.5rem;}
 .zt-field select{width:100%;padding:.75rem 1rem;background:rgba(255,255,255,.06);border:1px solid rgba(184,154,94,.2);color:var(--cream);font-family:'Jost',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;-webkit-appearance:none;cursor:pointer;}
 .zt-field select:focus{border-color:var(--gold);}
 .zt-field select option{background:#0d1f3c;color:var(--cream);}
 .zt-field select:disabled{opacity:.35;cursor:not-allowed;}
 .zt-warning{display:none;font-size:.75rem;color:#f0a060;background:rgba(240,160,96,.08);border-left:3px solid #f0a060;padding:.6rem .9rem;margin-top:.8rem;line-height:1.5;}
-.zt-results{display:none;}
-.zt-zone-badge{display:inline-flex;align-items:center;gap:1rem;margin-bottom:2rem;}
-.zt-zone-letter{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--gold);line-height:1;border:1px solid rgba(184,154,94,.3);width:80px;height:80px;display:flex;align-items:center;justify-content:center;}
+.zt-results{display:none;margin-top:1.2rem;}
+.zt-zone-badge{display:inline-flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.zt-zone-letter{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--gold);line-height:1;border:1px solid rgba(184,154,94,.3);width:80px;height:80px;display:flex;align-items:center;justify-content:center;animation:popIn .4s ease;}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
 .zt-zone-info{color:rgba(245,240,232,.65);font-size:.8rem;line-height:1.6;}
 .zt-zone-info strong{color:var(--cream);display:block;font-size:.95rem;margin-bottom:.3rem;}
 .zt-table{width:100%;border-collapse:collapse;font-size:.78rem;}
-.zt-table th{text-align:left;padding:.7rem .9rem;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(184,154,94,.7);border-bottom:1px solid rgba(184,154,94,.15);font-weight:400;}
+.zt-table th{text-align:left;padding:.7rem .9rem;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(184,154,94,.7);border-bottom:1px solid rgba(184,154,94,.15);font-weight:400;position:relative;}
 .zt-table td{padding:.7rem .9rem;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(245,240,232,.7);}
 .zt-table td:first-child{color:var(--cream);font-weight:400;}
 .zt-table .r100-val{color:var(--gold);font-weight:500;}
+/* Tooltip */
+.zt-tooltip-wrap{position:relative;display:inline-flex;align-items:center;gap:.3rem;cursor:help;}
+.zt-tooltip-wrap .tip{position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:rgba(13,31,60,.97);border:1px solid rgba(184,154,94,.3);color:rgba(245,240,232,.85);font-size:.65rem;line-height:1.5;padding:.5rem .7rem;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:50;font-weight:300;letter-spacing:0;text-transform:none;}
+.zt-tooltip-wrap:hover .tip{opacity:1;}
+.tip-icon{width:13px;height:13px;border-radius:50%;border:1px solid rgba(184,154,94,.5);color:rgba(184,154,94,.7);font-size:.55rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .zt-r100-note{margin-top:1.2rem;font-size:.72rem;line-height:1.65;color:rgba(245,240,232,.4);border-top:1px solid rgba(184,154,94,.12);padding-top:1rem;}
 
 /* CONFIGURADOR */
 .configurador{background:#f0f2f5;position:relative;overflow:hidden;}
 .configurador::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(13,31,60,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(13,31,60,.04) 1px,transparent 1px);background-size:28px 28px;}
-.config-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;position:relative;z-index:2;}
-.config-tag{display:inline-block;background:var(--navy);color:var(--gold);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;padding:.3rem .8rem;margin-bottom:1rem;}
-.config-intro-desc{font-size:.83rem;line-height:1.85;color:#5a6070;font-weight:300;margin-bottom:1.8rem;}
-.config-features{list-style:none;display:flex;flex-direction:column;gap:.7rem;}
-.config-features li{display:flex;align-items:center;gap:.65rem;font-size:.78rem;color:#4a5568;}
-.config-features li::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0;}
-.config-wizard{background:white;box-shadow:0 8px 40px rgba(13,31,60,.1);border-top:3px solid var(--gold);overflow:hidden;}
-.wizard-header{background:var(--navy);padding:1.4rem 2rem;display:flex;align-items:center;gap:1rem;}
-.wizard-header-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:white;font-weight:400;}
-.wizard-header-sub{font-size:.6rem;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;}
-.wizard-icon{width:34px;height:34px;background:rgba(184,154,94,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.wizard-progress{padding:1.2rem 2rem 0;background:white;}
-.progress-steps{display:flex;align-items:center;margin-bottom:.8rem;}
-.progress-step{display:flex;align-items:center;flex:1;}
-.progress-dot{width:24px;height:24px;border-radius:50%;background:#e2e8f0;color:#a0aec0;font-size:.6rem;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;border:2px solid #e2e8f0;}
-.progress-dot.active{background:var(--navy);color:var(--gold);border-color:var(--navy);}
-.progress-dot.done{background:#2ecc71;color:white;border-color:#2ecc71;}
-.progress-line{flex:1;height:2px;background:#e2e8f0;transition:background .3s;}
-.progress-line.done{background:#2ecc71;}
-.wizard-body{padding:1.8rem 2rem 1.5rem;}
-.wizard-step{display:none;}
-.wizard-step.active{display:block;}
-.wstep-label{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem;display:flex;align-items:center;gap:.5rem;}
-.wstep-label::before{content:'';width:1.2rem;height:1px;background:var(--gold);}
-.wstep-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--navy);font-weight:400;margin-bottom:1.4rem;}
-.w-field{margin-bottom:1rem;}
-.w-field label{display:block;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:#718096;margin-bottom:.42rem;}
-.w-field input,.w-field select,.w-field textarea{width:100%;padding:.7rem .9rem;border:1px solid #e2e8f0;background:#fafbfc;font-family:'Jost',sans-serif;font-size:.85rem;color:var(--dark-grey);outline:none;transition:border-color .2s;-webkit-appearance:none;}
-.w-field input:focus,.w-field select:focus{border-color:var(--gold);}
-.w-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
-.w-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem;}
-.radio-group{display:flex;gap:.5rem;flex-wrap:wrap;}
-.radio-btn{flex:1;min-width:70px;padding:.58rem .8rem;border:1.5px solid #e2e8f0;background:#fafbfc;text-align:center;cursor:pointer;font-size:.75rem;color:#4a5568;transition:all .2s;user-select:none;font-family:'Jost',sans-serif;}
-.radio-btn:hover{border-color:var(--gold);color:var(--gold);}
-.radio-btn.selected{border-color:var(--navy);background:rgba(13,31,60,.05);color:var(--navy);font-weight:500;}
-.stepper{display:flex;align-items:center;border:1px solid #e2e8f0;background:#fafbfc;height:40px;overflow:hidden;}
-.stepper button{width:40px;height:40px;background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--navy);transition:background .15s;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-.stepper button:hover{background:rgba(13,31,60,.06);}
-.stepper-val{flex:1;text-align:center;font-size:.92rem;font-weight:500;color:var(--navy);font-family:'Cormorant Garamond',serif;}
-.budget-display{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--navy);font-weight:300;margin-bottom:.35rem;}
-input[type=range]{-webkit-appearance:none;width:100%;height:3px;background:#e2e8f0;outline:none;margin:.7rem 0;}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid white;box-shadow:0 1px 4px rgba(184,154,94,.5);}
-.budget-labels{display:flex;justify-content:space-between;font-size:.62rem;color:#a0aec0;}
-.conditional-block{display:none;margin-top:1rem;padding:1rem;background:#fafbfc;border:1px solid #e2e8f0;border-left:3px solid var(--gold);}
-.conditional-block.visible{display:block;}
-.conditional-title{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;}
-.wizard-nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-top:1px solid #f0f2f5;background:#fafbfc;}
-.wbtn{padding:.65rem 1.6rem;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;}
-.wbtn-back{background:transparent;color:#718096;border:1px solid #e2e8f0;}
-.wbtn-back:hover{border-color:#a0aec0;color:#4a5568;}
-.wbtn-next{background:var(--navy);color:white;}
-.wbtn-next:hover{background:var(--navy-mid);}
-.wbtn-submit{background:var(--gold);color:white;}
-.wbtn-submit:hover{background:var(--gold-light);}
-.wizard-step-count{font-size:.62rem;color:#a0aec0;letter-spacing:.1em;}
-.wizard-result{display:none;padding:2rem;text-align:center;}
-.wizard-result.visible{display:block;}
-.result-spinner{width:44px;height:44px;border:3px solid #e2e8f0;border-top-color:var(--navy);border-radius:50%;animation:spin .9s linear infinite;margin:0 auto 1.4rem;}
-.result-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy);font-weight:300;margin-bottom:.4rem;}
-.result-sub{font-size:.8rem;color:#718096;margin-bottom:1.8rem;line-height:1.7;}
-.result-fields{text-align:left;}
-.summary-box{background:#f7f8fa;border:1px solid #e2e8f0;border-left:3px solid var(--gold);padding:.9rem 1.1rem;margin:1rem 0;font-size:.76rem;color:#4a5568;line-height:1.9;}
-.summary-box strong{color:var(--navy);}
-.result-success{display:none;text-align:center;padding:1rem 0;}
-.result-success.visible{display:block;}
-.result-success-icon{width:52px;height:52px;background:#2ecc71;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.3rem;color:white;}
-.result-success-title{font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:var(--navy);margin-bottom:.4rem;}
-.result-success-text{font-size:.8rem;color:#718096;line-height:1.7;}
+.cfg-wrap{max-width:860px;margin:0 auto;position:relative;z-index:2;}
+.cfg-intro{text-align:center;margin-bottom:3rem;}
+.cfg-intro .section-label{justify-content:center;}
+.cfg-intro .section-label::before{display:none;}
+.cfg-features-row{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.2rem;}
+.cfg-features-row span{font-size:.75rem;color:#5a6070;display:flex;align-items:center;gap:.4rem;}
+.cfg-features-row span::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+.cfg-card{background:white;box-shadow:0 8px 48px rgba(13,31,60,.12);border-top:3px solid var(--gold);overflow:hidden;}
+.cfg-header{background:var(--navy);padding:1.3rem 2rem;display:flex;align-items:center;gap:1rem;}
+.cfg-header-icon{width:34px;height:34px;background:rgba(184,154,94,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cfg-header-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:white;font-weight:400;}
+.cfg-header-sub{font-size:.6rem;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;}
+.svc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;padding:2rem;}
+.svc-tile{border:1.5px solid #e2e8f0;padding:1.2rem .8rem;text-align:center;cursor:pointer;transition:all .22s;background:#fafbfc;}
+.svc-tile:hover{border-color:var(--gold);background:#fffdf8;transform:translateY(-2px);}
+.svc-tile.active{border-color:var(--navy);background:var(--navy);}
+.svc-tile.active svg *{stroke:var(--gold);}
+.svc-tile.active .svc-tile-label{color:var(--cream);}
+.svc-tile-icon{margin-bottom:.6rem;}
+.svc-tile-icon svg{width:28px;height:28px;}
+.svc-tile-label{font-size:.68rem;font-weight:500;letter-spacing:.04em;color:#4a5568;line-height:1.3;transition:color .22s;}
+.cfg-progress{padding:.9rem 2rem 0;background:white;border-bottom:1px solid #f0f2f5;}
+.cfg-prog-steps{display:flex;align-items:center;}
+.cfg-prog-step{display:flex;align-items:center;flex:1;}
+.cfg-prog-dot{width:22px;height:22px;border-radius:50%;background:#e2e8f0;color:#a0aec0;font-size:.58rem;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;border:2px solid #e2e8f0;}
+.cfg-prog-dot.act{background:var(--navy);color:var(--gold);border-color:var(--navy);}
+.cfg-prog-dot.done{background:#2ecc71;color:white;border-color:#2ecc71;}
+.cfg-prog-line{flex:1;height:2px;background:#e2e8f0;transition:background .3s;}
+.cfg-prog-line.done{background:#2ecc71;}
+.cfg-body{padding:1.6rem 2rem 1.2rem;}
+.cfg-step{display:none;}
+.cfg-step.active{display:block;}
+.cfg-qlabel{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem;}
+.cfg-qlabel::before{content:'';width:1rem;height:1px;background:var(--gold);}
+.cfg-qtitle{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--navy);font-weight:400;margin-bottom:1.2rem;line-height:1.25;}
+.cfg-options{display:flex;flex-direction:column;gap:.5rem;}
+.cfg-opt{display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;border:1.5px solid #e2e8f0;background:#fafbfc;cursor:pointer;transition:all .18s;font-size:.82rem;color:#4a5568;font-family:'Jost',sans-serif;}
+.cfg-opt:hover{border-color:var(--gold);color:var(--navy);transform:translateX(3px);}
+.cfg-opt.sel{border-color:var(--navy);background:rgba(13,31,60,.04);color:var(--navy);font-weight:500;}
+.cfg-opt-dot{width:14px;height:14px;border-radius:50%;border:1.5px solid #cbd5e0;flex-shrink:0;transition:all .18s;display:flex;align-items:center;justify-content:center;}
+.cfg-opt.sel .cfg-opt-dot{border-color:var(--navy);background:var(--navy);}
+.cfg-opt.sel .cfg-opt-dot::after{content:'';width:5px;height:5px;background:white;border-radius:50%;}
+.cfg-check-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+.cfg-check{display:flex;align-items:center;gap:.65rem;padding:.6rem .9rem;border:1.5px solid #e2e8f0;background:#fafbfc;cursor:pointer;transition:all .18s;font-size:.8rem;color:#4a5568;font-family:'Jost',sans-serif;}
+.cfg-check:hover{border-color:var(--gold);}
+.cfg-check.sel{border-color:var(--navy);background:rgba(13,31,60,.04);color:var(--navy);}
+.cfg-check-box{width:14px;height:14px;border:1.5px solid #cbd5e0;flex-shrink:0;transition:all .18s;display:flex;align-items:center;justify-content:center;font-size:.6rem;}
+.cfg-check.sel .cfg-check-box{border-color:var(--navy);background:var(--navy);color:white;}
+.cfg-select{width:100%;padding:.7rem .9rem;border:1.5px solid #e2e8f0;background:#fafbfc;font-family:'Jost',sans-serif;font-size:.85rem;color:#2a2a2a;outline:none;transition:border-color .2s;-webkit-appearance:none;margin-bottom:.5rem;}
+.cfg-select:focus{border-color:var(--gold);}
+.cfg-label{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:#718096;margin-bottom:.4rem;display:block;}
+.cfg-warn{background:#fff8f0;border-left:3px solid #e67e22;padding:.7rem 1rem;font-size:.75rem;color:#b7550a;line-height:1.6;margin-top:1rem;}
+.cfg-info{background:#f7f8fa;border-left:3px solid var(--gold);padding:.7rem 1rem;font-size:.75rem;color:#4a5568;line-height:1.6;margin-top:1rem;}
+.cfg-result{display:none;padding:1.8rem 2rem;}
+.cfg-result.visible{display:block;}
+.cfg-res-spinner{width:40px;height:40px;border:3px solid #e2e8f0;border-top-color:var(--navy);border-radius:50%;animation:spin .9s linear infinite;margin:0 auto 1.2rem;}
+.cfg-res-service{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;}
+.cfg-res-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy);font-weight:300;margin-bottom:.6rem;line-height:1.25;}
+.cfg-res-desc{font-size:.82rem;color:#5a6070;line-height:1.75;margin-bottom:1.2rem;}
+.cfg-res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1.4rem;}
+.cfg-res-card{background:#f7f8fa;border:1px solid #e2e8f0;padding:.9rem;text-align:center;}
+.cfg-res-card-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#a0aec0;margin-bottom:.35rem;}
+.cfg-res-card-val{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--navy);font-weight:400;line-height:1.2;}
+.cfg-res-docs{background:#f7faff;border:1px solid #c3dafe;border-left:3px solid var(--navy);padding:.9rem 1.1rem;margin-bottom:1.2rem;font-size:.78rem;color:#4a5568;line-height:1.9;}
+.cfg-res-docs strong{color:var(--navy);display:block;margin-bottom:.3rem;}
+.cfg-contact-row{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.7rem;}
+.cfg-contact-row .cfg-input-wrap{flex:1;min-width:130px;}
+.cfg-input-wrap label{display:block;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#718096;margin-bottom:.38rem;}
+.cfg-input-wrap input{width:100%;padding:.68rem .9rem;border:1.5px solid #e2e8f0;background:#fafbfc;font-family:'Jost',sans-serif;font-size:.84rem;color:#2a2a2a;outline:none;transition:border-color .2s;}
+.cfg-input-wrap input:focus{border-color:var(--gold);}
+.cfg-success{display:none;text-align:center;padding:1rem 0;}
+.cfg-success.visible{display:block;}
+.cfg-success-icon{width:50px;height:50px;background:#2ecc71;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.2rem;color:white;}
+.cfg-success-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--navy);margin-bottom:.4rem;}
+.cfg-success-text{font-size:.8rem;color:#718096;line-height:1.7;}
+.cfg-nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-top:1px solid #f0f2f5;background:#fafbfc;}
+.cfg-btn{padding:.62rem 1.5rem;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;}
+.cfg-btn-back{background:transparent;color:#718096;border:1px solid #e2e8f0;}
+.cfg-btn-back:hover{border-color:#a0aec0;color:#4a5568;}
+.cfg-btn-next{background:var(--navy);color:white;}
+.cfg-btn-next:hover{background:var(--navy-mid);}
+.cfg-btn-wa{background:#25D366;color:white;display:inline-flex;align-items:center;gap:.5rem;}
+.cfg-btn-wa:hover{background:#1da851;}
+.cfg-btn-gold{background:var(--gold);color:white;}
+.cfg-btn-gold:hover{background:var(--gold-light);}
+.cfg-step-count{font-size:.6rem;color:#a0aec0;letter-spacing:.1em;}
 
 /* CONTACTO */
 .contact{background:var(--warm-white);display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;}
@@ -223,6 +263,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 .contact-icon svg{width:15px;height:15px;}
 .contact-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;}
 .contact-value{font-size:.87rem;color:var(--navy);}
+.contact-value a{color:var(--navy);text-decoration:none;}
+.contact-value a:hover{color:var(--gold);}
 .contact-form h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:var(--navy);margin-bottom:1.8rem;}
 .form-group{margin-bottom:1.1rem;}
 .form-group label{display:block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-bottom:.45rem;}
@@ -250,6 +292,7 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes countUp{from{opacity:0}to{opacity:1}}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -261,18 +304,25 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
   .about-right{display:none;}
   .proceso-steps{grid-template-columns:1fr 1fr;}
   .zt-layout{grid-template-columns:1fr;}
-  .config-layout{grid-template-columns:1fr;}
   .contact{grid-template-columns:1fr;gap:3rem;}
   .gallery-band{grid-template-columns:1fr 1fr;}
   .nav-links{display:none;}
-  .w-row,.w-row-3{grid-template-columns:1fr;}
+  .hamburger{display:flex;}
+  .svc-grid{grid-template-columns:repeat(3,1fr);}
+  .cfg-res-grid{grid-template-columns:1fr 1fr;}
+  .cfg-check-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:1rem;text-align:center;}
+}
+@media(max-width:480px){
+  .svc-grid{grid-template-columns:repeat(2,1fr);}
+  .form-row{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
+<nav id="main-nav">
   <a href="#" class="nav-logo">Arqui<span>term</span></a>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
@@ -281,7 +331,19 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
     <li><a href="#configurador">Configurador</a></li>
     <li><a href="#contacto" class="nav-cta">Contacto</a></li>
   </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#servicios" onclick="toggleMenu()">Servicios</a>
+  <a href="#nosotros" onclick="toggleMenu()">Nosotros</a>
+  <a href="#zona-termica" onclick="toggleMenu()">Zona Térmica</a>
+  <a href="#configurador" onclick="toggleMenu()">Configurador</a>
+  <a href="#contacto" onclick="toggleMenu()" style="color:var(--gold)">Contacto</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="inicio">
@@ -305,9 +367,9 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
       <div class="hero-img-overlay"></div>
     </div>
     <div class="hero-stat-bar">
-      <div class="hero-stat"><div class="hero-stat-num">10+</div><div class="hero-stat-label">Años experiencia</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" data-count="10" data-suffix="+">0</div><div class="hero-stat-label">Años experiencia</div></div>
       <div class="hero-stat"><div class="hero-stat-num">CEV</div><div class="hero-stat-label">Evaluador energético</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-label">Especialidades</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" data-count="4">0</div><div class="hero-stat-label">Especialidades</div></div>
       <div class="hero-stat"><div class="hero-stat-num">UBB</div><div class="hero-stat-label">Titulado U. del Bío-Bío</div></div>
     </div>
   </div>
@@ -315,168 +377,110 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
 
 <div class="section-divider"></div>
 
-<!-- GALERÍA BAND -->
+<!-- GALERÍA -->
 <div class="gallery-band">
-  <div class="gallery-cell">
-    <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?w=600&q=75" alt="Planos técnicos" loading="lazy">
-    <div class="gallery-cell-overlay"></div>
-  </div>
-  <div class="gallery-cell">
-    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=75" alt="Construcción arquitectónica" loading="lazy">
-    <div class="gallery-cell-overlay"></div>
-  </div>
-  <div class="gallery-cell">
-    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=75" alt="Diseño de interiores" loading="lazy">
-    <div class="gallery-cell-overlay"></div>
-  </div>
-  <div class="gallery-cell">
-    <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=600&q=75" alt="Proyecto terminado" loading="lazy">
-    <div class="gallery-cell-overlay"></div>
-  </div>
+  <div class="gallery-cell"><img src="https://images.unsplash.com/photo-1448630360428-65456885c650?w=600&q=75" alt="Planos técnicos" loading="lazy"><div class="gallery-cell-overlay"></div></div>
+  <div class="gallery-cell"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=75" alt="Construcción" loading="lazy"><div class="gallery-cell-overlay"></div></div>
+  <div class="gallery-cell"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=75" alt="Diseño interior" loading="lazy"><div class="gallery-cell-overlay"></div></div>
+  <div class="gallery-cell"><img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=600&q=75" alt="Proyecto terminado" loading="lazy"><div class="gallery-cell-overlay"></div></div>
 </div>
 
 <!-- SERVICIOS -->
 <section class="services" id="servicios">
   <div class="services-header">
-    <div>
+    <div class="reveal">
       <div class="section-label">Lo que ofrecemos</div>
       <h2 class="section-title">Nuestros<br><em>servicios</em></h2>
     </div>
-    <p class="services-lead">Cobertura integral en La Araucanía y Biobío. Cada servicio incluye asesoría personalizada, gestión de trámites y respaldo profesional en todas las etapas del proyecto.</p>
+    <p class="services-lead reveal">Cobertura integral en La Araucanía y Biobío. Cada servicio incluye asesoría personalizada, gestión de trámites y respaldo profesional en todas las etapas.</p>
   </div>
   <div class="services-grid">
-    <div class="service-card">
+    <div class="service-card reveal">
       <div class="service-num">01</div>
-      <div class="svc-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0d1f3c" stroke-width="1.5">
-          <rect x="3" y="14" width="18" height="7"/><polygon points="12,3 3,14 21,14"/>
-          <line x1="8" y1="14" x2="8" y2="21"/><line x1="16" y1="14" x2="16" y2="21"/>
-        </svg>
-      </div>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#0d1f3c" stroke-width="1.5"><rect x="3" y="14" width="18" height="7"/><polygon points="12,3 3,14 21,14"/><line x1="8" y1="14" x2="8" y2="21"/><line x1="16" y1="14" x2="16" y2="21"/></svg></div>
       <h3 class="service-name">Arquitectura<br>& Diseño</h3>
-      <p class="service-desc">Diseño arquitectónico adaptado a sus necesidades y al contexto local, con planos y gestión de permisos.</p>
-      <ul class="service-items">
-        <li>Proyectos nuevos</li><li>Regularizaciones Ley 20.898</li><li>Permisos de edificación</li>
-      </ul>
+      <p class="service-desc">Diseño arquitectónico adaptado a sus necesidades y contexto local, con planos y gestión de permisos.</p>
+      <ul class="service-items"><li>Proyectos nuevos</li><li>Regularizaciones Ley 20.898</li><li>Permisos de edificación</li></ul>
     </div>
-    <div class="service-card">
+    <div class="service-card reveal">
       <div class="service-num">02</div>
-      <div class="svc-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0d1f3c" stroke-width="1.5">
-          <rect x="5" y="11" width="14" height="11"/><polyline points="5,11 12,5 19,11"/>
-          <path d="M13 16 L11 16 L12 12 L10 12 L12 8 L14 12 L12 12" stroke-width="1.2"/>
-        </svg>
-      </div>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#0d1f3c" stroke-width="1.5"><rect x="5" y="11" width="14" height="11"/><polyline points="5,11 12,5 19,11"/><path d="M13 16 L11 16 L12 12 L10 12 L12 8 L14 12 L12 12" stroke-width="1.2"/></svg></div>
       <h3 class="service-name">Evaluador<br>Energético CEV</h3>
       <p class="service-desc">Certificación oficial que evalúa y califica la eficiencia energética de su vivienda según normativa MINVU.</p>
-      <ul class="service-items">
-        <li>Certificación de Viviendas (CEV)</li><li>Calificación energética oficial</li><li>Informe térmico</li>
-      </ul>
+      <ul class="service-items"><li>Certificación de Viviendas (CEV)</li><li>Calificación energética oficial</li><li>Informe térmico</li></ul>
     </div>
-    <div class="service-card">
+    <div class="service-card reveal">
       <div class="service-num">03</div>
-      <div class="svc-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0d1f3c" stroke-width="1.5">
-          <circle cx="12" cy="8" r="5"/><line x1="7" y1="8" x2="17" y2="8"/>
-          <line x1="12" y1="13" x2="12" y2="22"/><line x1="7" y1="22" x2="17" y2="22"/>
-        </svg>
-      </div>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#0d1f3c" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="12" y1="13" x2="12" y2="22"/><line x1="7" y1="22" x2="17" y2="22"/></svg></div>
       <h3 class="service-name">Tasaciones<br>Profesionales</h3>
       <p class="service-desc">Valoración técnica y objetiva de propiedades con respaldo profesional para bancos, notarías y particulares.</p>
-      <ul class="service-items">
-        <li>Tasación de viviendas</li><li>Tasación de terrenos</li><li>Propiedades agrícolas y comerciales</li>
-      </ul>
+      <ul class="service-items"><li>Tasación de viviendas</li><li>Tasación de terrenos</li><li>Propiedades agrícolas y comerciales</li></ul>
     </div>
-    <div class="service-card">
+    <div class="service-card reveal">
       <div class="service-num">04</div>
-      <div class="svc-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0d1f3c" stroke-width="1.5">
-          <line x1="6" y1="18" x2="18" y2="6"/><rect x="3" y="15" width="5" height="5" rx="1" transform="rotate(-45 6 18)"/>
-          <line x1="17" y1="7" x2="21" y2="3"/><circle cx="18" cy="6" r="2"/>
-        </svg>
-      </div>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#0d1f3c" stroke-width="1.5"><line x1="6" y1="18" x2="18" y2="6"/><rect x="3" y="15" width="5" height="5" rx="1" transform="rotate(-45 6 18)"/><line x1="17" y1="7" x2="21" y2="3"/><circle cx="18" cy="6" r="2"/></svg></div>
       <h3 class="service-name">Obras<br>Menores</h3>
       <p class="service-desc">Gestión integral de remodelaciones, ampliaciones e instalaciones con supervisión profesional en terreno.</p>
-      <ul class="service-items">
-        <li>Remodelaciones y ampliaciones</li><li>Subdivisiones prediales</li><li>Cambio de uso de suelo</li>
-      </ul>
+      <ul class="service-items"><li>Remodelaciones y ampliaciones</li><li>Subdivisiones prediales</li><li>Cambio de uso de suelo</li></ul>
     </div>
   </div>
 </section>
 
 <!-- NOSOTROS -->
 <section class="about" id="nosotros">
-  <div>
+  <div class="reveal-left">
     <div class="section-label">Quién soy</div>
     <h2 class="section-title">Arquitectura con<br><em>propósito</em></h2>
     <div class="about-highlight">"Cada proyecto es único — lo diseño para que dure, funcione y se integre perfectamente a su entorno."</div>
-    <p class="about-text">Soy José Luis Belmar Jara, Arquitecto titulado de la Universidad del Bío-Bío. Con base en Angol, ofrezco servicios profesionales de arquitectura, diseño, evaluación energética y tasaciones en toda la región de La Araucanía y Biobío.</p>
-    <p class="about-text">Mi enfoque combina rigor técnico con una visión centrada en el cliente, asegurando que cada proyecto cumpla con la normativa vigente y supere las expectativas de quienes confían en mi trabajo.</p>
+    <p class="about-text">Soy José Luis Belmar Jara, Arquitecto titulado de la Universidad del Bío-Bío. Con base en Angol, ofrezco servicios profesionales de arquitectura, diseño, evaluación energética y tasaciones en toda La Araucanía y Biobío.</p>
+    <p class="about-text">Mi enfoque combina rigor técnico con una visión centrada en el cliente, asegurando que cada proyecto cumpla con la normativa vigente y supere las expectativas.</p>
     <a href="https://wa.me/56998772218" target="_blank" rel="noopener" class="about-cta">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Consultar por WhatsApp
     </a>
   </div>
-  <div class="about-right">
+  <div class="about-right reveal-right">
     <div class="about-img-frame">
       <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="Arquitecto en obra">
       <div class="about-img-border"></div>
-      <div class="about-badge">
-        <span class="about-badge-num">CEV</span>
-        <div class="about-badge-text">Evaluador Energético</div>
-      </div>
+      <div class="about-badge"><span class="about-badge-num">CEV</span><div class="about-badge-text">Evaluador Energético</div></div>
     </div>
   </div>
 </section>
 
 <!-- PROCESO -->
 <section class="proceso" id="proceso">
-  <div class="section-label">Cómo trabajamos</div>
-  <h2 class="section-title">El <em>proceso</em></h2>
+  <div class="reveal">
+    <div class="section-label">Cómo trabajamos</div>
+    <h2 class="section-title">El <em>proceso</em></h2>
+  </div>
   <div class="proceso-steps">
-    <div class="step"><div class="step-num">01</div><h3 class="step-title">Consulta inicial</h3><p class="step-desc">Conversamos sobre su proyecto, necesidades y presupuesto. Sin costo. Sin compromiso.</p></div>
-    <div class="step"><div class="step-num">02</div><h3 class="step-title">Diagnóstico</h3><p class="step-desc">Evaluamos el terreno o propiedad existente y definimos el alcance del proyecto.</p></div>
-    <div class="step"><div class="step-num">03</div><h3 class="step-title">Diseño & Gestión</h3><p class="step-desc">Desarrollamos los planos, gestionamos permisos y coordinamos cada etapa.</p></div>
-    <div class="step"><div class="step-num">04</div><h3 class="step-title">Entrega</h3><p class="step-desc">Su proyecto finalizado con documentación completa y respaldo profesional.</p></div>
+    <div class="step reveal"><div class="step-num">01</div><h3 class="step-title">Consulta inicial</h3><p class="step-desc">Conversamos sobre su proyecto, necesidades y presupuesto. Sin costo. Sin compromiso.</p></div>
+    <div class="step reveal"><div class="step-num">02</div><h3 class="step-title">Diagnóstico</h3><p class="step-desc">Evaluamos el terreno o propiedad existente y definimos el alcance del proyecto.</p></div>
+    <div class="step reveal"><div class="step-num">03</div><h3 class="step-title">Diseño & Gestión</h3><p class="step-desc">Desarrollamos los planos, gestionamos permisos y coordinamos cada etapa.</p></div>
+    <div class="step reveal"><div class="step-num">04</div><h3 class="step-title">Entrega</h3><p class="step-desc">Su proyecto finalizado con documentación completa y respaldo profesional.</p></div>
   </div>
 </section>
 
 <!-- ZONA TERMICA -->
 <section class="zona-termica" id="zona-termica">
-  <div class="section-label">Herramienta técnica</div>
-  <h2 class="section-title">Consultor de<br><em>Zona Térmica</em></h2>
-  <p class="zona-termica-desc">Determine la zona térmica de su comuna y las exigencias mínimas de aislación según la propuesta del Art. 4.1.10 de la OGUC. Cobertura nacional completa.</p>
+  <div class="section-label reveal">Herramienta técnica</div>
+  <h2 class="section-title reveal">Consultor de<br><em>Zona Térmica</em></h2>
+  <p class="zona-termica-desc reveal">Determine la zona térmica de su comuna y las exigencias mínimas de aislación según la propuesta del Art. 4.1.10 de la OGUC. Cobertura nacional completa.</p>
   <div class="zt-layout">
-    <div class="zt-selectors">
-      <div class="zt-field">
-        <label>Región</label>
-        <select id="zt-reg" onchange="ztActualizarProvincias()">
-          <option value="">— Seleccione región —</option>
-        </select>
-      </div>
-      <div class="zt-field">
-        <label>Provincia</label>
-        <select id="zt-prov" onchange="ztActualizarComunas()" disabled>
-          <option value="">— Seleccione provincia —</option>
-        </select>
-      </div>
-      <div class="zt-field">
-        <label>Comuna</label>
-        <select id="zt-com" onchange="ztMostrarResultados()" disabled>
-          <option value="">— Seleccione comuna —</option>
-        </select>
-        <div id="zt-warning" class="zt-warning">⚠ Esta comuna presenta variaciones climáticas según altitud o meridiano. Revisar cartografía de detalle del proyecto.</div>
-      </div>
+    <div class="reveal-left">
+      <div class="zt-field"><label>Región</label><select id="zt-reg" onchange="ztActualizarProvincias()"><option value="">— Seleccione región —</option></select></div>
+      <div class="zt-field"><label>Provincia</label><select id="zt-prov" onchange="ztActualizarComunas()" disabled><option value="">— Seleccione provincia —</option></select></div>
+      <div class="zt-field"><label>Comuna</label><select id="zt-com" onchange="ztMostrarResultados()" disabled><option value="">— Seleccione comuna —</option></select><div id="zt-warning" class="zt-warning">⚠ Esta comuna presenta variaciones climáticas según altitud o meridiano. Revisar cartografía de detalle del proyecto.</div></div>
       <div id="zt-results" class="zt-results">
-        <div class="zt-zone-badge">
-          <div class="zt-zone-letter" id="zt-zona-letra">-</div>
-          <div class="zt-zone-info">
-            <strong id="zt-zona-nombre">Zona térmica</strong>
-            Exigencias OGUC Art. 4.1.10<br>Actualización nacional
-          </div>
-        </div>
+        <div class="zt-zone-badge"><div class="zt-zone-letter" id="zt-zona-letra">-</div><div class="zt-zone-info"><strong id="zt-zona-nombre">Zona térmica</strong>Exigencias OGUC Art. 4.1.10<br>Actualización nacional</div></div>
         <table class="zt-table">
-          <thead><tr><th>Complejo</th><th>U Máx (W/m²K)</th><th>Rt Mín (m²K/W)</th><th>R100 sugerido</th></tr></thead>
+          <thead><tr>
+            <th>Complejo</th>
+            <th><div class="zt-tooltip-wrap">U Máx <span class="tip-icon">?</span><div class="tip">Transmitancia térmica máxima<br>en W/m²K. Menor = mejor aislación.</div></div></th>
+            <th><div class="zt-tooltip-wrap">Rt Mín <span class="tip-icon">?</span><div class="tip">Resistencia térmica mínima<br>en m²K/W. Mayor = mejor aislación.</div></div></th>
+            <th><div class="zt-tooltip-wrap">R100 <span class="tip-icon">?</span><div class="tip">Espesor en mm de lana de vidrio<br>estándar (λ=0.040) para cumplir<br>el 100% de la Rt mínima exigida.</div></div></th>
+          </tr></thead>
           <tbody>
             <tr><td>Techumbre</td><td id="zt-u-tech">—</td><td id="zt-rt-tech">—</td><td class="r100-val" id="zt-r100-tech">—</td></tr>
             <tr><td>Muros</td><td id="zt-u-muro">—</td><td id="zt-rt-muro">—</td><td class="r100-val" id="zt-r100-muro">—</td></tr>
@@ -484,11 +488,10 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
             <tr><td>Puertas opacas</td><td id="zt-u-puerta">—</td><td id="zt-rt-puerta">—</td><td class="r100-val" id="zt-r100-puerta">—</td></tr>
           </tbody>
         </table>
-        <div class="zt-r100-note">R100 = espesor nominal en mm de aislante genérico (λ=0.040 W/mK) que cumpliría por sí solo la Rt mínima exigida. Fórmula: Espesor = Rt × 40.</div>
+        <div class="zt-r100-note">R100 = espesor nominal en mm de aislante genérico (λ=0.040 W/mK) que cumpliría por sí solo la Rt mínima. Fórmula: Espesor = Rt × 40.</div>
       </div>
     </div>
-    <!-- right: blueprint decorative -->
-    <div style="display:flex;align-items:center;justify-content:center;opacity:.12;">
+    <div class="reveal-right" style="display:flex;align-items:center;justify-content:center;opacity:.1;">
       <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px;">
         <rect x="60" y="200" width="280" height="220" stroke="#b89a5e" stroke-width="1.5"/>
         <rect x="100" y="240" width="60" height="80" stroke="#b89a5e" stroke-width="1"/>
@@ -501,7 +504,6 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
         <line x1="20" y1="420" x2="380" y2="420" stroke="rgba(184,154,94,.4)" stroke-width=".5"/>
         <line x1="60" y1="160" x2="60" y2="440" stroke="rgba(184,154,94,.4)" stroke-width=".5"/>
         <line x1="340" y1="160" x2="340" y2="440" stroke="rgba(184,154,94,.4)" stroke-width=".5"/>
-        <!-- dimension lines -->
         <line x1="40" y1="200" x2="40" y2="420" stroke="#b89a5e" stroke-width=".8"/>
         <line x1="35" y1="200" x2="45" y2="200" stroke="#b89a5e" stroke-width=".8"/>
         <line x1="35" y1="420" x2="45" y2="420" stroke="#b89a5e" stroke-width=".8"/>
@@ -515,169 +517,34 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
 
 <!-- CONFIGURADOR -->
 <section class="configurador" id="configurador">
-<style>
-.cfg-wrap{max-width:860px;margin:0 auto;position:relative;z-index:2;}
-.cfg-intro{text-align:center;margin-bottom:3rem;}
-.cfg-intro .section-label{justify-content:center;}
-.cfg-intro .section-label::before{display:none;}
-.cfg-features-row{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.2rem;}
-.cfg-features-row span{font-size:.75rem;color:#5a6070;display:flex;align-items:center;gap:.4rem;}
-.cfg-features-row span::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0;}
-
-/* WIZARD CARD */
-.cfg-card{background:white;box-shadow:0 8px 48px rgba(13,31,60,.12);border-top:3px solid var(--gold);overflow:hidden;}
-.cfg-header{background:var(--navy);padding:1.3rem 2rem;display:flex;align-items:center;gap:1rem;}
-.cfg-header-icon{width:34px;height:34px;background:rgba(184,154,94,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.cfg-header-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:white;font-weight:400;}
-.cfg-header-sub{font-size:.6rem;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;}
-
-/* SERVICE SELECTOR */
-.svc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;padding:2rem;}
-.svc-tile{border:1.5px solid #e2e8f0;padding:1.2rem .8rem;text-align:center;cursor:pointer;transition:all .22s;background:#fafbfc;}
-.svc-tile:hover{border-color:var(--gold);background:#fffdf8;}
-.svc-tile.active{border-color:var(--navy);background:var(--navy);}
-.svc-tile.active .svc-tile-icon svg path,.svc-tile.active .svc-tile-icon svg rect,.svc-tile.active .svc-tile-icon svg circle,.svc-tile.active .svc-tile-icon svg line,.svc-tile.active .svc-tile-icon svg polyline{stroke:var(--gold);}
-.svc-tile.active .svc-tile-label{color:var(--cream);}
-.svc-tile-icon{margin-bottom:.6rem;}
-.svc-tile-icon svg{width:28px;height:28px;}
-.svc-tile-label{font-size:.68rem;font-weight:500;letter-spacing:.04em;color:#4a5568;line-height:1.3;transition:color .22s;}
-
-/* PROGRESS */
-.cfg-progress{padding:.9rem 2rem 0;background:white;border-bottom:1px solid #f0f2f5;}
-.cfg-prog-steps{display:flex;align-items:center;}
-.cfg-prog-step{display:flex;align-items:center;flex:1;}
-.cfg-prog-dot{width:22px;height:22px;border-radius:50%;background:#e2e8f0;color:#a0aec0;font-size:.58rem;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;border:2px solid #e2e8f0;}
-.cfg-prog-dot.act{background:var(--navy);color:var(--gold);border-color:var(--navy);}
-.cfg-prog-dot.done{background:#2ecc71;color:white;border-color:#2ecc71;}
-.cfg-prog-line{flex:1;height:2px;background:#e2e8f0;transition:background .3s;}
-.cfg-prog-line.done{background:#2ecc71;}
-
-/* BODY */
-.cfg-body{padding:1.6rem 2rem 1.2rem;}
-.cfg-step{display:none;}
-.cfg-step.active{display:block;}
-.cfg-qlabel{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem;}
-.cfg-qlabel::before{content:'';width:1rem;height:1px;background:var(--gold);}
-.cfg-qtitle{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--navy);font-weight:400;margin-bottom:1.2rem;line-height:1.25;}
-.cfg-options{display:flex;flex-direction:column;gap:.5rem;}
-.cfg-opt{display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;border:1.5px solid #e2e8f0;background:#fafbfc;cursor:pointer;transition:all .18s;font-size:.82rem;color:#4a5568;font-family:'Jost',sans-serif;}
-.cfg-opt:hover{border-color:var(--gold);color:var(--navy);}
-.cfg-opt.sel{border-color:var(--navy);background:rgba(13,31,60,.04);color:var(--navy);font-weight:500;}
-.cfg-opt-dot{width:14px;height:14px;border-radius:50%;border:1.5px solid #cbd5e0;flex-shrink:0;transition:all .18s;display:flex;align-items:center;justify-content:center;}
-.cfg-opt.sel .cfg-opt-dot{border-color:var(--navy);background:var(--navy);}
-.cfg-opt.sel .cfg-opt-dot::after{content:'';width:5px;height:5px;background:white;border-radius:50%;}
-
-/* CHECKBOX style */
-.cfg-check-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
-.cfg-check{display:flex;align-items:center;gap:.65rem;padding:.6rem .9rem;border:1.5px solid #e2e8f0;background:#fafbfc;cursor:pointer;transition:all .18s;font-size:.8rem;color:#4a5568;font-family:'Jost',sans-serif;}
-.cfg-check:hover{border-color:var(--gold);}
-.cfg-check.sel{border-color:var(--navy);background:rgba(13,31,60,.04);color:var(--navy);}
-.cfg-check-box{width:14px;height:14px;border:1.5px solid #cbd5e0;flex-shrink:0;transition:all .18s;display:flex;align-items:center;justify-content:center;font-size:.6rem;}
-.cfg-check.sel .cfg-check-box{border-color:var(--navy);background:var(--navy);color:white;}
-
-/* SELECT */
-.cfg-select{width:100%;padding:.7rem .9rem;border:1.5px solid #e2e8f0;background:#fafbfc;font-family:'Jost',sans-serif;font-size:.85rem;color:#2a2a2a;outline:none;transition:border-color .2s;-webkit-appearance:none;margin-bottom:.5rem;}
-.cfg-select:focus{border-color:var(--gold);}
-.cfg-select option{background:white;}
-.cfg-label{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:#718096;margin-bottom:.4rem;display:block;}
-
-/* WARN BOX */
-.cfg-warn{background:#fff8f0;border-left:3px solid #e67e22;padding:.7rem 1rem;font-size:.75rem;color:#b7550a;line-height:1.6;margin-top:1rem;}
-.cfg-info{background:#f7f8fa;border-left:3px solid var(--gold);padding:.7rem 1rem;font-size:.75rem;color:#4a5568;line-height:1.6;margin-top:1rem;}
-
-/* RESULT */
-.cfg-result{display:none;padding:1.8rem 2rem;}
-.cfg-result.visible{display:block;}
-.cfg-res-spinner{width:40px;height:40px;border:3px solid #e2e8f0;border-top-color:var(--navy);border-radius:50%;animation:spin .9s linear infinite;margin:0 auto 1.2rem;}
-.cfg-res-service{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;}
-.cfg-res-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy);font-weight:300;margin-bottom:.6rem;line-height:1.25;}
-.cfg-res-desc{font-size:.82rem;color:#5a6070;line-height:1.75;margin-bottom:1.2rem;}
-.cfg-res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1.4rem;}
-.cfg-res-card{background:#f7f8fa;border:1px solid #e2e8f0;padding:.9rem;text-align:center;}
-.cfg-res-card-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#a0aec0;margin-bottom:.35rem;}
-.cfg-res-card-val{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--navy);font-weight:400;line-height:1.2;}
-.cfg-res-docs{background:#f7faff;border:1px solid #c3dafe;border-left:3px solid var(--navy);padding:.9rem 1.1rem;margin-bottom:1.2rem;font-size:.78rem;color:#4a5568;line-height:1.9;}
-.cfg-res-docs strong{color:var(--navy);display:block;margin-bottom:.3rem;}
-.cfg-contact-row{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.7rem;}
-.cfg-contact-row .cfg-input-wrap{flex:1;min-width:130px;}
-.cfg-input-wrap label{display:block;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#718096;margin-bottom:.38rem;}
-.cfg-input-wrap input{width:100%;padding:.68rem .9rem;border:1.5px solid #e2e8f0;background:#fafbfc;font-family:'Jost',sans-serif;font-size:.84rem;color:#2a2a2a;outline:none;transition:border-color .2s;}
-.cfg-input-wrap input:focus{border-color:var(--gold);}
-.cfg-success{display:none;text-align:center;padding:1rem 0;}
-.cfg-success.visible{display:block;}
-.cfg-success-icon{width:50px;height:50px;background:#2ecc71;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.2rem;color:white;}
-.cfg-success-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--navy);margin-bottom:.4rem;}
-.cfg-success-text{font-size:.8rem;color:#718096;line-height:1.7;}
-
-/* NAV */
-.cfg-nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-top:1px solid #f0f2f5;background:#fafbfc;}
-.cfg-btn{padding:.62rem 1.5rem;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;}
-.cfg-btn-back{background:transparent;color:#718096;border:1px solid #e2e8f0;}
-.cfg-btn-back:hover{border-color:#a0aec0;color:#4a5568;}
-.cfg-btn-next{background:var(--navy);color:white;}
-.cfg-btn-next:hover{background:var(--navy-mid);}
-.cfg-btn-wa{background:#25D366;color:white;display:inline-flex;align-items:center;gap:.5rem;}
-.cfg-btn-wa:hover{background:#1da851;}
-.cfg-btn-gold{background:var(--gold);color:white;}
-.cfg-btn-gold:hover{background:var(--gold-light);}
-.cfg-step-count{font-size:.6rem;color:#a0aec0;letter-spacing:.1em;}
-@media(max-width:700px){.svc-grid{grid-template-columns:repeat(3,1fr);}.cfg-res-grid{grid-template-columns:1fr 1fr;}.cfg-check-grid{grid-template-columns:1fr;}}
-</style>
-
 <div class="cfg-wrap">
-  <div class="cfg-intro">
+  <div class="cfg-intro reveal">
     <div class="section-label">Herramienta inteligente</div>
     <h2 class="section-title">Configurador de <em>consultas</em></h2>
-    <p style="font-size:.87rem;color:#5a6070;max-width:500px;margin:.5rem auto 0;line-height:1.8;font-weight:300;">Seleccione su servicio y responda unas preguntas breves. El sistema generará automáticamente una pre-factibilidad personalizada.</p>
+    <p style="font-size:.87rem;color:#5a6070;max-width:500px;margin:.5rem auto 0;line-height:1.8;font-weight:300;">Seleccione su servicio y responda unas preguntas breves. El sistema generará una pre-factibilidad personalizada y abrirá WhatsApp con todo precargado.</p>
     <div class="cfg-features-row">
       <span>Resultado automático por servicio</span>
-      <span>Generación de WhatsApp precargado</span>
+      <span>WhatsApp precargado con sus datos</span>
       <span>Sin compromiso · 24 hrs hábiles</span>
     </div>
   </div>
-
-  <div class="cfg-card">
+  <div class="cfg-card reveal">
     <div class="cfg-header">
       <div class="cfg-header-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b89a5e" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
       <div><div class="cfg-header-title">Configurador de Consulta Técnica</div><div class="cfg-header-sub">Arq. José Luis Belmar Jara · UBB · Angol</div></div>
     </div>
-
-    <!-- SERVICE SELECTOR -->
     <div id="svc-selector">
       <div style="padding:1.4rem 2rem .4rem;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);">¿Qué servicio necesitas?</div>
       <div class="svc-grid">
-        <div class="svc-tile" onclick="selectService('obras')">
-          <div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><rect x="4" y="16" width="20" height="9"/><polygon points="14,4 4,16 24,16"/><line x1="10" y1="16" x2="10" y2="25"/><line x1="18" y1="16" x2="18" y2="25"/></svg></div>
-          <div class="svc-tile-label">Diseño / Ampliación / Regularización</div>
-        </div>
-        <div class="svc-tile" onclick="selectService('subdivision')">
-          <div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><rect x="3" y="3" width="22" height="22"/><line x1="14" y1="3" x2="14" y2="25"/><line x1="3" y1="14" x2="25" y2="14"/></svg></div>
-          <div class="svc-tile-label">Subdivisiones y Loteos</div>
-        </div>
-        <div class="svc-tile" onclick="selectService('tasacion')">
-          <div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><circle cx="14" cy="10" r="6"/><line x1="9" y1="10" x2="19" y2="10"/><line x1="14" y1="16" x2="14" y2="26"/><line x1="9" y1="26" x2="19" y2="26"/></svg></div>
-          <div class="svc-tile-label">Tasaciones</div>
-        </div>
-        <div class="svc-tile" onclick="selectService('termico')">
-          <div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><rect x="5" y="12" width="18" height="13"/><polyline points="5,12 14,5 23,12"/><path d="M15 18 L13 18 L14 13 L12 13 L14 9 L16 13 L14 13" stroke-width="1.2"/></svg></div>
-          <div class="svc-tile-label">Informes Térmicos y CEV</div>
-        </div>
-        <div class="svc-tile" onclick="selectService('construccion')">
-          <div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><line x1="6" y1="22" x2="22" y2="6"/><rect x="3" y="18" width="5" height="5" rx="1" transform="rotate(-45 6 22)"/><line x1="21" y1="7" x2="25" y2="3"/><circle cx="22" cy="6" r="2.5"/></svg></div>
-          <div class="svc-tile-label">Construcción y Electricidad</div>
-        </div>
+        <div class="svc-tile" onclick="selectService('obras')"><div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><rect x="4" y="16" width="20" height="9"/><polygon points="14,4 4,16 24,16"/><line x1="10" y1="16" x2="10" y2="25"/><line x1="18" y1="16" x2="18" y2="25"/></svg></div><div class="svc-tile-label">Diseño / Ampliación / Regularización</div></div>
+        <div class="svc-tile" onclick="selectService('subdivision')"><div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><rect x="3" y="3" width="22" height="22"/><line x1="14" y1="3" x2="14" y2="25"/><line x1="3" y1="14" x2="25" y2="14"/></svg></div><div class="svc-tile-label">Subdivisiones y Loteos</div></div>
+        <div class="svc-tile" onclick="selectService('tasacion')"><div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><circle cx="14" cy="10" r="6"/><line x1="9" y1="10" x2="19" y2="10"/><line x1="14" y1="16" x2="14" y2="26"/><line x1="9" y1="26" x2="19" y2="26"/></svg></div><div class="svc-tile-label">Tasaciones</div></div>
+        <div class="svc-tile" onclick="selectService('termico')"><div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><rect x="5" y="12" width="18" height="13"/><polyline points="5,12 14,5 23,12"/><path d="M15 18 L13 18 L14 13 L12 13 L14 9 L16 13 L14 13" stroke-width="1.2"/></svg></div><div class="svc-tile-label">Informes Térmicos y CEV</div></div>
+        <div class="svc-tile" onclick="selectService('construccion')"><div class="svc-tile-icon"><svg viewBox="0 0 28 28" fill="none" stroke="#4a5568" stroke-width="1.5"><line x1="6" y1="22" x2="22" y2="6"/><rect x="3" y="18" width="5" height="5" rx="1" transform="rotate(-45 6 22)"/><line x1="21" y1="7" x2="25" y2="3"/><circle cx="22" cy="6" r="2.5"/></svg></div><div class="svc-tile-label">Construcción y Electricidad</div></div>
       </div>
     </div>
-
-    <!-- PROGRESS (hidden until service selected) -->
-    <div id="cfg-progress-bar" style="display:none;" class="cfg-progress">
-      <div class="cfg-prog-steps" id="cfg-prog-steps"></div>
-    </div>
-
-    <!-- DYNAMIC STEPS BODY -->
+    <div id="cfg-progress-bar" style="display:none;" class="cfg-progress"><div class="cfg-prog-steps" id="cfg-prog-steps"></div></div>
     <div class="cfg-body" id="cfg-body" style="display:none;"></div>
-
-    <!-- RESULT -->
     <div class="cfg-result" id="cfg-result">
       <div class="cfg-res-spinner" id="cfg-spinner"></div>
       <div id="cfg-result-content" style="display:none;">
@@ -696,15 +563,13 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
       <div class="cfg-success" id="cfg-success">
         <div class="cfg-success-icon">✓</div>
         <div class="cfg-success-title">¡Consulta enviada!</div>
-        <div class="cfg-success-text">El arquitecto José Luis Belmar Jara le contactará dentro de las próximas 24 horas hábiles con la pre-factibilidad de su proyecto.</div>
-        <div style="margin-top:1.2rem"><a href="https://wa.me/56998772218" target="_blank" rel="noopener" class="cfg-btn cfg-btn-wa" style="text-decoration:none;display:inline-flex">
+        <div class="cfg-success-text">El arquitecto José Luis Belmar Jara le contactará dentro de las próximas 24 horas hábiles.</div>
+        <div style="margin-top:1.2rem"><a href="https://wa.me/56998772218" target="_blank" rel="noopener" class="cfg-btn cfg-btn-wa" style="text-decoration:none;display:inline-flex;padding:.7rem 1.4rem;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           También puede escribir directamente
         </a></div>
       </div>
     </div>
-
-    <!-- NAV -->
     <div class="cfg-nav" id="cfg-nav" style="display:none;">
       <button class="cfg-btn cfg-btn-back" id="cfg-btn-back" onclick="cfgBack()">← Anterior</button>
       <div class="cfg-step-count" id="cfg-step-count"></div>
@@ -714,307 +579,18 @@ footer{background:var(--navy);color:rgba(245,240,232,.45);padding:2.5rem 5%;disp
 </div>
 </section>
 
-<script>
-/* ══════════════════════════════════════════
-   CONFIGURADOR INTELIGENTE
-══════════════════════════════════════════ */
-const COMUNAS_MALLECO=['Angol','Collipulli','Curacautín','Ercilla','Lonquimay','Los Sauces','Lumaco','Purén','Renaico','Traiguén','Victoria'];
-const TODAS_COMUNAS=['Angol','Arauco','Bulnes','Cabrero','Cañete','Carahue','Castro','Chillán','Chillán Viejo','Cholchol','Collipulli','Concepción','Contulmo','Coronel','Curacautín','Ercilla','Freire','Frutillar','Gorbea','Hualpén','Hualqui','Laja','Lanco','Lautaro','Lebu','Lonquimay','Loncoche','Los Ángeles','Los Lagos','Los Sauces','Lota','Lumaco','Maule','Melipeuco','Mulchén','Nacimiento','Negrete','Nueva Imperial','Osorno','Padre Las Casas','Penco','Perquenco','Pitrufquén','Pucón','Puerto Montt','Puerto Varas','Purén','Purranque','Renaico','San Carlos','San Pedro de la Paz','Santa Bárbara','Santa Juana','Talcahuano','Temuco','Tirúa','Toltén','Tomé','Traiguén','Valdivia','Victoria','Villarrica','Yumbel','Otra'];
-
-/* FLOW DEFINITIONS */
-const FLOWS={
-  obras:{
-    label:'Diseño / Ampliación / Regularización',
-    steps:[
-      {id:'tipo',q:'¿Qué necesitas?',opts:['Obra nueva','Ampliación','Regularización Ley 20.898','Remodelación interior','Recepción final','No estoy seguro']},
-      {id:'zona',q:'¿La propiedad está en zona urbana o rural?',opts:['Urbana','Rural','No sé']},
-      {id:'metros',q:'¿Cuántos metros cuadrados aproximados?',opts:['Menos de 50 m²','50 – 140 m²','140 – 250 m²','Más de 250 m²']},
-      {id:'construida',q:'¿La vivienda ya está construida?',opts:['Sí','Parcialmente','No']},
-      {id:'comuna',q:'Comuna del proyecto',type:'select'},
-      {id:'docs',q:'¿Tienes estos antecedentes?',type:'check',opts:['Rol','Plano existente','Escritura','Certificado de avalúo','Fotografías','Ninguno']}
-    ],
-    result:(ans)=>{
-      const tipo=ans.tipo||'proyecto';const zona=ans.zona||'';const metros=ans.metros||'';
-      let srv='',desc='',plazo='',hono='',docs=[];
-      if(tipo==='Regularización Ley 20.898'){
-        srv='Regularización Ley 20.898';
-        desc=`Regularización de vivienda existente en zona ${zona.toLowerCase()}. Este trámite permite obtener la recepción municipal de construcciones sin permiso previo.`;
-        plazo='3 – 6 meses';hono='Según superficie y complejidad';
-        docs=['Rol de avalúo (SII)','Escritura de la propiedad','Fotografías del inmueble','Certificado de número municipal'];
-      } else if(tipo==='Obra nueva'){
-        srv='Proyecto de Obra Nueva';
-        desc=`Diseño y gestión completa de proyecto de vivienda nueva en zona ${zona.toLowerCase()} de ${metros}.`;
-        plazo='4 – 8 meses';hono='Desde UF 15 + IVA según proyecto';
-        docs=['Escritura o compromiso de compraventa','Plano de ubicación','Certificado de informaciones previas DOM'];
-      } else if(tipo==='Ampliación'){
-        srv='Proyecto de Ampliación';
-        desc=`Ampliación de vivienda existente en zona ${zona.toLowerCase()}. Incluye diseño, cálculo y tramitación de permiso de edificación.`;
-        plazo='2 – 5 meses';hono='Según superficie de ampliación';
-        docs=['Planos existentes (si los hay)','Rol SII','Escritura','Recepción final original'];
-      } else {
-        srv=tipo||'Servicio de Arquitectura';
-        desc=`Según los antecedentes ingresados, el servicio recomendado corresponde a: ${tipo} en zona ${zona.toLowerCase()}.`;
-        plazo='A confirmar en consulta';hono='A cotizar según alcance';
-        docs=['Documentos específicos según caso'];
-      }
-      return {srv,desc,plazo,hono,docs,warn:zona==='Rural'?'Los proyectos rurales pueden requerir coordinación con SAG, Municipalidad y Conservador de Bienes Raíces.':''};
-    },
-    waMsg:(ans,nombre)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${nombre}\n*Servicio:* ${ans.tipo||'Diseño/Ampliación/Regularización'}\n*Zona:* ${ans.zona||'—'}\n*Superficie:* ${ans.metros||'—'}\n*Estado construcción:* ${ans.construida||'—'}\n*Comuna:* ${ans.comuna||'—'}\n*Antecedentes:* ${ans.docs&&ans.docs.length?ans.docs.join(', '):'Ninguno'}\n\nQuedo a disposición para coordinar la pre-factibilidad.`
-  },
-
-  subdivision:{
-    label:'Subdivisiones y Loteos',
-    steps:[
-      {id:'tramite',q:'Tipo de trámite',opts:['Subdivisión rural','Subdivisión urbana','Fusión predial','Loteo','Saneamiento','No estoy seguro']},
-      {id:'superficie',q:'¿Cuál es la superficie del terreno?',opts:['Menos de 5.000 m²','5.000 m² – 1 ha','Más de 1 ha']},
-      {id:'topo',q:'¿Existe levantamiento topográfico?',opts:['Sí','No','No sé']},
-      {id:'necesita',q:'¿Qué necesitas?',type:'check',opts:['Plano SAG','Plano DOM','Rol nuevo SII','Cambio de destino','Apertura de caminos','Todo el proceso']},
-      {id:'comuna',q:'Comuna del predio',type:'select'}
-    ],
-    result:(ans)=>{
-      const tramite=ans.tramite||'Subdivisión';
-      return{
-        srv:tramite,
-        desc:`Proceso de ${tramite.toLowerCase()} para terreno de ${ans.superficie||'—'}. Incluye coordinación con organismos públicos según el tipo de trámite.`,
-        plazo:tramite.includes('rural')?'4 – 8 meses':'3 – 6 meses',
-        hono:'A cotizar según complejidad y superficie',
-        docs:['Escritura del predio','Rol de avalúo SII','Plano de emplazamiento','Certificado de avalúo fiscal'],
-        warn:'Los servicios rurales pueden requerir coordinación con SAG, Conservador, SII y Municipalidad. Esto aumenta los plazos y el costo total del trámite.'
-      };
-    },
-    waMsg:(ans,nombre)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${nombre}\n*Trámite:* ${ans.tramite||'—'}\n*Superficie:* ${ans.superficie||'—'}\n*Topografía:* ${ans.topo||'—'}\n*Requiere:* ${ans.necesita&&ans.necesita.length?ans.necesita.join(', '):'—'}\n*Comuna:* ${ans.comuna||'—'}\n\nQuedo a disposición.`
-  },
-
-  tasacion:{
-    label:'Tasaciones',
-    steps:[
-      {id:'tipo',q:'Tipo de propiedad',opts:['Casa','Parcela','Sitio','Local comercial','Terreno agrícola','Departamento']},
-      {id:'motivo',q:'¿Motivo de la tasación?',opts:['Venta','Compra','Juicio','Banco / Hipotecaria','Herencia','Referencial']},
-      {id:'comuna',q:'Comuna donde se ubica la propiedad',type:'select'},
-      {id:'recepcion',q:'¿Existe recepción municipal?',opts:['Sí','No','Parcial','No sé']}
-    ],
-    result:(ans)=>{
-      const motivo=ans.motivo||'';
-      let tipoInforme='Tasación comercial simple';
-      if(motivo==='Banco / Hipotecaria')tipoInforme='Tasación bancaria (formato institución financiera)';
-      else if(motivo==='Juicio')tipoInforme='Informe técnico pericial';
-      return{
-        srv:'Tasación '+tipoInforme,
-        desc:`Valoración profesional de ${(ans.tipo||'propiedad').toLowerCase()} para fines de ${(motivo||'referencia').toLowerCase()}. Informe con respaldo técnico y metodología de mercado.`,
-        plazo:'5 – 10 días hábiles',
-        hono:'Según tipo y ubicación de la propiedad',
-        docs:['Escritura de la propiedad','Rol SII','Planos (si existen)','Recepción final municipal'],
-        warn:ans.recepcion==='No'?'La propiedad sin recepción municipal puede presentar restricciones para tasación bancaria. Se recomienda regularización previa.':''
-      };
-    },
-    waMsg:(ans,nombre)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${nombre}\n*Servicio:* Tasación\n*Tipo propiedad:* ${ans.tipo||'—'}\n*Motivo:* ${ans.motivo||'—'}\n*Comuna:* ${ans.comuna||'—'}\n*Recepción:* ${ans.recepcion||'—'}\n\nQuedo a disposición.`
-  },
-
-  termico:{
-    label:'Informes Térmicos y CEV',
-    steps:[
-      {id:'tipo',q:'¿Qué necesitas?',opts:['Informe térmico DOM','Evaluación Energética CEV','Modelación térmica','Análisis de condensación','Puentes térmicos','Asesoría eficiencia energética']},
-      {id:'proyecto',q:'Tipo de proyecto',opts:['Vivienda nueva','Vivienda existente','Sala cuna / edificio público','Proyecto DS49','Otro']},
-      {id:'materialidad',q:'Materialidad principal',opts:['Albañilería','Metalcon','Madera','Hormigón','Mixto']},
-      {id:'docs',q:'¿Posees?',type:'check',opts:['Planos DWG / PDF','Modelo Archicad / Revit / IFC','Especificaciones técnicas','Detalles constructivos','Ninguno']},
-      {id:'comuna',q:'Comuna del proyecto (para zona climática automática)',type:'select'}
-    ],
-    result:(ans)=>{
-      const tipo=ans.tipo||'Informe térmico';
-      return{
-        srv:tipo,
-        desc:`${tipo} para ${(ans.proyecto||'proyecto').toLowerCase()} con materialidad ${(ans.materialidad||'—').toLowerCase()}. La zona climática se determina automáticamente según la comuna indicada.`,
-        plazo:tipo.includes('CEV')?'5 – 10 días hábiles':'3 – 7 días hábiles',
-        hono:'Según superficie y complejidad del proyecto',
-        docs:['Planos de arquitectura (PDF o DWG)','Especificaciones técnicas','Detalles constructivos de muros, techumbre y pisos'],
-        warn:'Este servicio diferencia técnicamente su proyecto. La evaluación energética es exigida por DOM para nuevas viviendas y el CEV agrega valor comercial a propiedades existentes.'
-      };
-    },
-    waMsg:(ans,nombre)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${nombre}\n*Servicio:* ${ans.tipo||'Informe térmico/CEV'}\n*Proyecto:* ${ans.proyecto||'—'}\n*Materialidad:* ${ans.materialidad||'—'}\n*Documentación disponible:* ${ans.docs&&ans.docs.length?ans.docs.join(', '):'Ninguna'}\n*Comuna:* ${ans.comuna||'—'}\n\nQuedo a disposición.`
-  },
-
-  construccion:{
-    label:'Construcción y Electricidad',
-    steps:[
-      {id:'servicio',q:'Servicio requerido',opts:['Construcción menor','Remodelación','Techumbre','Instalación eléctrica','Aumento de capacidad','Certificación TE1','Reparación']},
-      {id:'inmueble',q:'Tipo de inmueble',opts:['Vivienda','Local comercial','Oficina','Parcela']},
-      {id:'zona',q:'Tipo de zona',opts:['Urbana','Rural']},
-      {id:'comuna',q:'Comuna del proyecto',type:'select',malleco:true}
-    ],
-    result:(ans)=>{
-      const esMalleco=COMUNAS_MALLECO.includes(ans.comuna);
-      if(!esMalleco&&ans.comuna&&ans.comuna!=='')return{
-        srv:'Servicio no disponible en esta ubicación',
-        desc:'Actualmente el servicio de Construcción y Electricidad se encuentra disponible solo dentro de la Provincia de Malleco.',
-        plazo:'—',hono:'—',docs:[],warn:'Para proyectos fuera de Malleco, puede consultar otros servicios de arquitectura y gestión de obras.'
-      };
-      return{
-        srv:ans.servicio||'Construcción y Electricidad',
-        desc:`${ans.servicio||'Servicio'} en ${ans.zona?.toLowerCase()||'zona'} — ${ans.inmueble?.toLowerCase()||'inmueble'}. Provincia de Malleco, con supervisión profesional en terreno.`,
-        plazo:'A definir según proyecto',
-        hono:'A cotizar en visita técnica',
-        docs:['Plano de la propiedad (si existe)','Rol SII','Documentación eléctrica existente (si aplica)'],
-        warn:''
-      };
-    },
-    waMsg:(ans,nombre)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${nombre}\n*Servicio:* ${ans.servicio||'Construcción/Electricidad'}\n*Inmueble:* ${ans.inmueble||'—'}\n*Zona:* ${ans.zona||'—'}\n*Comuna:* ${ans.comuna||'—'}\n\nQuedo a disposición.`
-  }
-};
-
-/* STATE */
-let currentFlow=null,currentStepIdx=0,answers={};
-
-function selectService(key){
-  currentFlow=key;currentStepIdx=0;answers={};
-  document.getElementById('svc-selector').style.display='none';
-  document.querySelectorAll('.svc-tile').forEach(t=>t.classList.remove('active'));
-  document.querySelector('[onclick="selectService(\''+key+'\')"]').classList.add('active');
-  buildProgress();
-  document.getElementById('cfg-progress-bar').style.display='block';
-  document.getElementById('cfg-body').style.display='block';
-  document.getElementById('cfg-nav').style.display='flex';
-  document.getElementById('cfg-result').style.display='none';
-  renderStep();
-}
-
-function buildProgress(){
-  const steps=FLOWS[currentFlow].steps;
-  const c=document.getElementById('cfg-prog-steps');
-  c.innerHTML='';
-  steps.forEach((s,i)=>{
-    const dot=document.createElement('div');dot.className='cfg-prog-step';
-    dot.innerHTML=`<div class="cfg-prog-dot" id="cpd-${i}">${i+1}</div>${i<steps.length-1?'<div class="cfg-prog-line" id="cpl-'+i+'"></div>':''}`;
-    c.appendChild(dot);
-  });
-  updateProgress();
-}
-
-function updateProgress(){
-  const steps=FLOWS[currentFlow].steps;
-  steps.forEach((_,i)=>{
-    const d=document.getElementById('cpd-'+i);
-    if(!d)return;
-    d.classList.remove('act','done');
-    if(i<currentStepIdx)d.classList.add('done');
-    else if(i===currentStepIdx)d.classList.add('act');
-    if(i<steps.length-1){const l=document.getElementById('cpl-'+i);if(l)l.classList.toggle('done',i<currentStepIdx);}
-  });
-  const total=steps.length;
-  document.getElementById('cfg-step-count').textContent=`Paso ${currentStepIdx+1} de ${total}`;
-  document.getElementById('cfg-btn-back').style.visibility=currentStepIdx===0?'hidden':'visible';
-  const isLast=currentStepIdx===total-1;
-  document.getElementById('cfg-btn-next').textContent=isLast?'Ver resultado →':'Siguiente →';
-  document.getElementById('cfg-btn-next').className='cfg-btn '+(isLast?'cfg-btn-gold':'cfg-btn-next');
-}
-
-function renderStep(){
-  const step=FLOWS[currentFlow].steps[currentStepIdx];
-  const body=document.getElementById('cfg-body');
-  let html=`<div class="cfg-step active">
-    <div class="cfg-qlabel">Paso ${currentStepIdx+1}</div>
-    <div class="cfg-qtitle">${step.q}</div>`;
-
-  if(step.type==='select'){
-    const isMalleco=step.malleco;
-    const comunas=isMalleco?COMUNAS_MALLECO:TODAS_COMUNAS;
-    html+=`<select class="cfg-select" id="step-input" onchange="setAnswer('${step.id}',this.value)">
-      <option value="">— Seleccione comuna —</option>
-      ${comunas.map(c=>`<option value="${c}"${answers[step.id]===c?' selected':''}>${c}</option>`).join('')}
-    </select>`;
-    if(isMalleco)html+=`<div class="cfg-info">⚑ Este servicio está disponible actualmente solo en la Provincia de Malleco. Si su comuna no aparece, consulte otro servicio.</div>`;
-  } else if(step.type==='check'){
-    const sel=answers[step.id]||[];
-    html+=`<div class="cfg-check-grid">${step.opts.map(o=>`
-      <div class="cfg-check${sel.includes(o)?' sel':''}" onclick="toggleCheck('${step.id}','${o}',this)">
-        <div class="cfg-check-box">${sel.includes(o)?'✓':''}</div>${o}
-      </div>`).join('')}</div>`;
-  } else {
-    html+=`<div class="cfg-options">${step.opts.map(o=>`
-      <div class="cfg-opt${answers[step.id]===o?' sel':''}" onclick="setAnswer('${step.id}','${o}',this)">
-        <div class="cfg-opt-dot"></div>${o}
-      </div>`).join('')}</div>`;
-  }
-  html+=`</div>`;
-  body.innerHTML=html;
-}
-
-function setAnswer(id,val,el){
-  answers[id]=val;
-  if(el){document.querySelectorAll('.cfg-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');}
-}
-function toggleCheck(id,val,el){
-  if(!answers[id])answers[id]=[];
-  const idx=answers[id].indexOf(val);
-  if(idx>-1){answers[id].splice(idx,1);el.classList.remove('sel');el.querySelector('.cfg-check-box').textContent='';}
-  else{answers[id].push(val);el.classList.add('sel');el.querySelector('.cfg-check-box').textContent='✓';}
-}
-
-function cfgNext(){
-  const steps=FLOWS[currentFlow].steps;
-  if(currentStepIdx<steps.length-1){
-    currentStepIdx++;updateProgress();renderStep();
-  } else {showResult();}
-}
-function cfgBack(){
-  if(currentStepIdx>0){currentStepIdx--;updateProgress();renderStep();}
-  else{
-    document.getElementById('svc-selector').style.display='block';
-    document.getElementById('cfg-progress-bar').style.display='none';
-    document.getElementById('cfg-body').style.display='none';
-    document.getElementById('cfg-nav').style.display='none';
-    document.getElementById('cfg-result').style.display='none';
-    currentFlow=null;
-  }
-}
-
-function showResult(){
-  document.getElementById('cfg-body').style.display='none';
-  document.getElementById('cfg-nav').style.display='none';
-  document.getElementById('cfg-result').style.display='block';
-  document.getElementById('cfg-spinner').style.display='block';
-  document.getElementById('cfg-result-content').style.display='none';
-  document.getElementById('cfg-success').classList.remove('visible');
-
-  setTimeout(()=>{
-    document.getElementById('cfg-spinner').style.display='none';
-    const r=FLOWS[currentFlow].result(answers);
-    document.getElementById('res-service-label').textContent=FLOWS[currentFlow].label;
-    document.getElementById('res-title').textContent='Servicio recomendado: '+r.srv;
-    document.getElementById('res-desc').textContent=r.desc;
-    document.getElementById('res-grid').innerHTML=`
-      <div class="cfg-res-card"><div class="cfg-res-card-label">Plazo estimado</div><div class="cfg-res-card-val">${r.plazo}</div></div>
-      <div class="cfg-res-card"><div class="cfg-res-card-label">Honorarios</div><div class="cfg-res-card-val">${r.hono}</div></div>
-      <div class="cfg-res-card"><div class="cfg-res-card-label">Estado</div><div class="cfg-res-card-val">Consulta gratuita</div></div>`;
-    let docsHtml=`<strong>Documentos sugeridos:</strong>${r.docs.map(d=>`<br>— ${d}`).join('')}`;
-    if(r.warn)docsHtml+=`<div class="cfg-warn" style="margin-top:.8rem;margin-bottom:0">⚠ ${r.warn}</div>`;
-    document.getElementById('res-docs').innerHTML=docsHtml;
-    document.getElementById('cfg-result-content').style.display='block';
-  },1800);
-}
-
-function cfgSubmit(){
-  const nombre=document.getElementById('res-nombre').value.trim();
-  const wa=document.getElementById('res-wa').value.trim();
-  if(!nombre||!wa){alert('Por favor ingrese su nombre y WhatsApp.');return;}
-  document.getElementById('cfg-result-content').style.display='none';
-  document.getElementById('cfg-success').classList.add('visible');
-  const msg=FLOWS[currentFlow].waMsg(answers,nombre);
-  setTimeout(()=>{window.open('https://wa.me/56998772218?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer');},700);
-}
-</script>
-
 <!-- CONTACTO -->
 <section class="contact" id="contacto">
-  <div>
+  <div class="reveal-left">
     <div class="section-label">Hablemos</div>
     <h2 class="section-title">Contáctenos</h2>
     <div class="contact-info-item">
       <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#b89a5e" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.1 6.1l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg></div>
-      <div><div class="contact-label">WhatsApp</div><div class="contact-value">+56 9 9877 2218</div></div>
+      <div><div class="contact-label">WhatsApp</div><div class="contact-value"><a href="https://wa.me/56998772218" target="_blank" rel="noopener">+56 9 9877 2218</a></div></div>
     </div>
     <div class="contact-info-item">
       <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#b89a5e" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-      <div><div class="contact-label">Email</div><div class="contact-value">jose@arquiterm.cl</div></div>
+      <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:jose.belmar@gmail.com">jose.belmar@gmail.com</a></div></div>
     </div>
     <div class="contact-info-item">
       <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#b89a5e" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
@@ -1025,9 +601,9 @@ function cfgSubmit(){
       <div><div class="contact-label">Horario</div><div class="contact-value">Lunes a viernes, 9:00 – 18:00</div></div>
     </div>
   </div>
-  <div>
+  <div class="reveal-right">
     <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:300;color:var(--navy);margin-bottom:1.7rem;">Cuéntenos su proyecto</h3>
-    <form id="contact-form" action="https://formspree.io/f/REEMPLAZAR_CON_TU_ID" method="POST" novalidate>
+    <form id="contact-form" action="https://formspree.io/jose.belmar@gmail.com" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Nueva consulta desde arquiterm.cl">
       <div class="form-row">
         <div class="form-group"><label>Nombre</label><input type="text" name="nombre" placeholder="Su nombre" required></div>
@@ -1043,8 +619,8 @@ function cfgSubmit(){
       </div>
       <div class="form-group"><label>Mensaje</label><textarea name="mensaje" placeholder="Cuéntenos brevemente su proyecto..."></textarea></div>
       <button type="submit" class="form-submit" id="cf-submit">Enviar consulta</button>
-      <div id="cf-success" style="display:none;margin-top:1rem;padding:1rem;background:#f0fff4;border-left:3px solid #2ecc71;color:#1a7a3c;font-size:.82rem;line-height:1.6;">✓ <strong>¡Mensaje enviado!</strong> Le responderemos a la brevedad.</div>
-      <div id="cf-error" style="display:none;margin-top:1rem;padding:1rem;background:#fff5f5;border-left:3px solid #e53e3e;color:#c53030;font-size:.82rem;">✗ Error al enviar. Escríbanos a <a href="mailto:jose@arquiterm.cl" style="color:#c53030">jose@arquiterm.cl</a></div>
+      <div id="cf-success" style="display:none;margin-top:1rem;padding:1rem;background:#f0fff4;border-left:3px solid #2ecc71;color:#1a7a3c;font-size:.82rem;line-height:1.6;">✓ <strong>¡Mensaje enviado!</strong> Le responderemos a la brevedad a <strong>jose.belmar@gmail.com</strong></div>
+      <div id="cf-error" style="display:none;margin-top:1rem;padding:1rem;background:#fff5f5;border-left:3px solid #e53e3e;color:#c53030;font-size:.82rem;">✗ Error al enviar. Escríbanos a <a href="mailto:jose.belmar@gmail.com" style="color:#c53030">jose.belmar@gmail.com</a> o por <a href="https://wa.me/56998772218" style="color:#c53030">WhatsApp</a>.</div>
     </form>
   </div>
 </section>
@@ -1055,7 +631,7 @@ function cfgSubmit(){
   <div class="footer-copy">© 2025 Arquiterm · Arquitecto UBB · Angol, Chile</div>
   <div class="footer-rrss">
     <a href="https://wa.me/56998772218" target="_blank" title="WhatsApp">W</a>
-    <a href="mailto:jose@arquiterm.cl" title="Email">@</a>
+    <a href="mailto:jose.belmar@gmail.com" title="Email">@</a>
   </div>
 </footer>
 
@@ -1064,7 +640,46 @@ function cfgSubmit(){
 </a>
 
 <script>
-/* ── ZONA TERMICA DATA ── */
+/* ══ SCROLL REVEAL ══ */
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const revealObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
+},{threshold:.12});
+revealEls.forEach(el=>revealObs.observe(el));
+
+/* ══ NAV SCROLL ══ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+/* ══ HAMBURGER ══ */
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('mobile-menu').classList.contains('open')?'hidden':'';
+}
+
+/* ══ COUNTER ANIMATION ══ */
+function animateCounter(el){
+  const target=parseInt(el.dataset.count);
+  const suffix=el.dataset.suffix||'';
+  const duration=1200;const step=duration/target;
+  let current=0;
+  const timer=setInterval(()=>{
+    current++;el.textContent=current+suffix;
+    if(current>=target)clearInterval(timer);
+  },step);
+}
+const counterObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&e.target.dataset.count){
+      animateCounter(e.target);counterObs.unobserve(e.target);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>counterObs.observe(el));
+
+/* ══ ZONA TERMICA ══ */
 const ztCoef={A:{tech:[0.84,1.19],muro:[2.10,0.48],piso:[3.60,0.28],puerta:['—','—']},B:{tech:[0.47,2.13],muro:[0.80,1.25],piso:[0.70,1.43],puerta:[1.70,0.59]},C:{tech:[0.47,2.13],muro:[0.80,1.25],piso:[0.87,1.15],puerta:[1.70,0.59]},D:{tech:[0.38,2.63],muro:[0.80,1.25],piso:[0.60,1.67],puerta:[1.70,0.59]},E:{tech:[0.33,3.03],muro:[0.60,1.67],piso:[0.60,1.67],puerta:[1.70,0.59]},F:{tech:[0.28,3.57],muro:[0.45,2.22],piso:[0.50,2.00],puerta:[1.70,0.59]},G:{tech:[0.28,3.57],muro:[0.40,2.50],piso:[0.39,2.56],puerta:[1.70,0.59]},H:{tech:[0.25,4.00],muro:[0.30,3.33],piso:[0.32,3.13],puerta:[1.70,0.59]},I:{tech:[0.25,4.00],muro:[0.35,2.86],piso:[0.32,3.13],puerta:[1.70,0.59]}};
 const ztDB={"De Arica y Parinacota":{"Arica":{"Arica":"A*","Camarones":"A*"},"Parinacota":{"Putre":"H","General Lagos":"H"}},"De Tarapaca":{"Iquique":{"Iquique":"A","Alto Hospicio":"A"},"Tamarugal":{"Camiña":"B*","Colchane":"H","Huara":"A*","Pozo Almonte":"A*","Pica":"B*"}},"De Antofagasta":{"Antofagasta":{"Antofagasta":"A*","Mejillones":"A","Sierra Gorda":"B","Taltal":"A*"},"El Loa":{"Calama":"D","Ollagüe":"H","San Pedro de Atacama":"D*"},"Tocopilla":{"Tocopilla":"A","María Elena":"B"}},"De Atacama":{"Copiapó":{"Copiapó":"B*","Caldera":"A","Tierra Amarilla":"B*"},"Chañaral":{"Chañaral":"A","Diego de Almagro":"B*"},"Huasco":{"Vallenar":"C*","Alto del Carmen":"D*","Freirina":"C","Huasco":"A"}},"De Coquimbo":{"Elqui":{"La Serena":"C","Coquimbo":"C","Andacollo":"D","La Higuera":"C*","Paiguano":"D*","Vicuña":"C*"},"Choapa":{"Illapel":"D*","Canela":"C*","Los Vilos":"C","Salamanca":"D*"},"Limarí":{"Ovalle":"C*","Combarbalá":"D*","Monte Patria":"C*","Punitaqui":"C*","Río Hurtado":"D*"}},"De Valparaiso":{"Valparaíso":{"Valparaíso":"C","Viña del Mar":"C","Concón":"C","Quintero":"C","Puchuncaví":"C","Casablanca":"D","Juan Fernández":"C"},"Isla de Pascua":{"Isla de Pascua":"A"},"Los Andes":{"Los Andes":"D","Calle Larga":"D","Rinconada":"D","San Esteban":"D*"},"Petorca":{"La Ligua":"C*","Cabildo":"D*","Papudo":"C","Petorca":"D*","Zapallar":"C"},"Quillota":{"Quillota":"C","Calera":"C","Hijuelas":"D","La Cruz":"C","Nogales":"D"},"San Antonio":{"San Antonio":"C","Algarrobo":"C","Cartagena":"C","El Quisco":"C","El Tabo":"C","Santo Domingo":"C"},"San Felipe":{"San Felipe":"D","Catemu":"D","Llaillay":"D","Panquehue":"D","Putaendo":"D*","Santa María":"D"},"Marga Marga":{"Quilpué":"C","Villa Alemana":"C","Limache":"C","Olmué":"D"}},"Metropolitana de Santiago":{"Santiago":{"Santiago":"D","Cerrillos":"D","Cerro Navia":"D","Conchalí":"D","El Bosque":"D","Estación Central":"D","Huechuraba":"D","Independencia":"D","La Cisterna":"D","La Florida":"D","La Granja":"D","La Pintana":"D","La Reina":"D","Las Condes":"D*","Lo Barnechea":"D*","Lo Espejo":"D","Lo Prado":"D","Macul":"D","Maipú":"D","Ñuñoa":"D","Pedro Aguirre Cerda":"D","Peñalolén":"D","Providencia":"D","Pudahuel":"D","Quilicura":"D","Quinta Normal":"D","Recoleta":"D","Renca":"D","San Joaquín":"D","San Miguel":"D","San Ramón":"D","Vitacura":"D"},"Cordillera":{"Puente Alto":"D","Pirque":"D*","San José de Maipo":"E*"},"Chacabuco":{"Colina":"D*","Lampa":"D*","Tiltil":"D*"},"Maipo":{"San Bernardo":"D","Buin":"D","Calera de Tango":"D","Paine":"D*"},"Melipilla":{"Melipilla":"D","Alhué":"D*","Curacaví":"D*","María Pinto":"D","San Pedro":"D"},"Talagante":{"Talagante":"D","El Monte":"D","Isla de Maipo":"D","Padre Hurtado":"D","Peñaflor":"D"}},"Del Libertador B. O'Higgins":{"Cachapoal":{"Rancagua":"D","Codegua":"D*","Coinco":"D","Coltauco":"D","Doñihue":"D","Graneros":"D","Las Cabras":"D","Machalí":"D*","Mostazal":"D*","Olivar":"D","Peumo":"D","Pichidegua":"D","Quinta de Tilcoco":"D","Rengo":"D","Requínoa":"D","San Vicente":"D"},"Cardenal Caro":{"Pichilemu":"C","La Estrella":"D","Litueche":"D","Marchihue":"D","Navidad":"C","Pumanque":"D"},"Colchagua":{"San Fernando":"D*","Chépica":"D","Chimbarongo":"D","Lolol":"D","Nancagua":"D","Palmilla":"D","Peralillo":"D","Placilla":"D","Santa Cruz":"D","Paredones":"C"}},"Del Maule":{"Talca":{"Talca":"E","Curepto":"E","Constitución":"E","Maule":"E","Empedrado":"E","Pelarco":"E","Pencahue":"E","Río Claro":"E","San Clemente":"E*","San Rafael":"E"},"Curicó":{"Curicó":"E","Hualañé":"E","Licantén":"E","Molina":"E*","Rauco":"E","Romeral":"E*","Sagrada Familia":"E","Teno":"E","Vichuquén":"E"},"Linares":{"Linares":"E","Colbún":"E*","Longaví":"E*","Parral":"D*","Retiro":"E","San Javier":"E","Villa Alegre":"E","Yerbas Buenas":"E"},"Cauquenes":{"Cauquenes":"E","Chanco":"E","Pelluhue":"E"}},"De Ñuble":{"Diguillín":{"Chillán":"F","Chillán Viejo":"F","Bulnes":"F","El Carmen":"F","Pemuco":"F","Pinto":"F*","Quillón":"F","San Ignacio":"F","Yungay":"F"},"Punilla":{"San Carlos":"F","Coihueco":"F*","Niquén":"F","San Fabián":"F*","San Nicolás":"F"},"Itata":{"Quirihue":"E","Cobquecura":"E","Coelemu":"E","Ninhue":"F","Portezuelo":"F","Ránquil":"F","Trehuaco":"E"}},"Del Biobío":{"Concepción":{"Concepción":"E","Coronel":"E","Chiguayante":"E","Florida":"F","Hualqui":"E","Lota":"E","Penco":"E","San Pedro de la Paz":"E","Santa Juana":"E","Talcahuano":"E","Tomé":"E","Hualpén":"E"},"Arauco":{"Lebu":"E","Arauco":"E","Cañete":"E","Contulmo":"E","Curanilahue":"E","Los Álamos":"E","Tirúa":"E"},"Bio-Bío":{"Los Ángeles":"F","Antuco":"F*","Cabrero":"F","Laja":"F","Mulchén":"F","Nacimiento":"F","Negrete":"F","Quilaco":"F*","Quilleco":"F*","San Rosendo":"F","Santa Bárbara":"F*","Tucapel":"F*","Yumbel":"F","Alto Biobío":"F*"}},"De La Araucanía":{"Malleco":{"Angol":"F","Collipulli":"F","Curacautín":"F*","Ercilla":"F","Lonquimay":"H","Los Sauces":"F","Lumaco":"F","Purén":"F","Renaico":"F","Traiguén":"F","Victoria":"F"},"Cautín":{"Temuco":"F","Carahue":"E*","Cunco":"F*","Curarrehue":"H","Freire":"F","Galvarino":"F","Gorbea":"F","Lautaro":"F","Loncoche":"F","Melipeuco":"H","Nueva Imperial":"F","Padre Las Casas":"F","Perquenco":"F","Pitrufquén":"F","Pucón":"H","Saavedra":"E","Teodoro Schmidt":"E","Toltén":"E","Vilcún":"F*","Villarrica":"F*","Cholchol":"F"}},"De Los Rios":{"Valdivia":{"Valdivia":"F","Corral":"F","Lanco":"F","Los Lagos":"F","Máfil":"F","Mariquina":"F","Paillaco":"F","Panguipulli":"F*"},"Ranco":{"La Unión":"F*","Futrono":"F*","Lago Ranco":"F*","Río Bueno":"F*"}},"De Los Lagos":{"Llanquihue":{"Puerto Montt":"G","Calbuco":"G","Cochamó":"G*","Fresia":"G","Frutillar":"G","Llanquihue":"G","Los Muermos":"G","Puerto Varas":"G*","Maullín":"G"},"Chiloé":{"Ancud":"G","Castro":"G","Chonchi":"G","Curaco de Vélez":"G","Dalcahue":"G","Puqueldón":"G","Queilén":"G","Quellón":"G","Quemchi":"G","Quinchao":"G"},"Osorno":{"Osorno":"G","Puerto Octay":"G*","Purranque":"G","Puyehue":"G*","Río Negro":"G","San Juan de la Costa":"G","San Pablo":"G"},"Palena":{"Chaitén":"G*","Futaleufú":"I","Hualaihué":"G*","Palena":"I"}},"De Aisen":{"Coihaique":{"Coihaique":"I","Lago Verde":"I"},"Aisen":{"Aisen":"G*","Cisnes":"G*","Guaitecas":"G"},"Capitan Prat":{"Cochrane":"I","O'Higgins":"I","Tortel":"I"},"General Carrera":{"Chile Chico":"I","Río Ibáñez":"I"}},"De Magallanes":{"Magallanes":{"Punta Arenas":"I","Laguna Blanca":"I","Río Verde":"I","San Gregorio":"I"},"Antártica Chilena":{"Cabo de Hornos":"I","Antártica":"I"},"Tierra del Fuego":{"Porvenir":"I","Primavera":"I","Timaukel":"I"},"Última Esperanza":{"Natales":"I","Torres del Paine":"I"}}};
 
@@ -1072,66 +687,32 @@ window.onload=function(){
   const s=document.getElementById('zt-reg');
   for(let r in ztDB){const o=document.createElement('option');o.value=r;o.textContent='Región '+r;s.appendChild(o);}
 };
-function ztActualizarProvincias(){
-  const r=document.getElementById('zt-reg').value;
-  const sp=document.getElementById('zt-prov');
-  const sc=document.getElementById('zt-com');
-  sp.innerHTML='<option value="">— Seleccione provincia —</option>';
-  sc.innerHTML='<option value="">— Seleccione comuna —</option>';
-  sc.disabled=true;
-  document.getElementById('zt-results').style.display='none';
-  document.getElementById('zt-warning').style.display='none';
-  if(r){sp.disabled=false;for(let p in ztDB[r]){const o=document.createElement('option');o.value=p;o.textContent=p;sp.appendChild(o);}}
-  else sp.disabled=true;
-}
-function ztActualizarComunas(){
-  const r=document.getElementById('zt-reg').value;
-  const p=document.getElementById('zt-prov').value;
-  const sc=document.getElementById('zt-com');
-  sc.innerHTML='<option value="">— Seleccione comuna —</option>';
-  document.getElementById('zt-results').style.display='none';
-  document.getElementById('zt-warning').style.display='none';
-  if(p){sc.disabled=false;for(let c in ztDB[r][p]){const o=document.createElement('option');o.value=c;o.textContent=c;sc.appendChild(o);}}
-  else sc.disabled=true;
-}
-function ztMostrarResultados(){
-  const r=document.getElementById('zt-reg').value;
-  const p=document.getElementById('zt-prov').value;
-  const c=document.getElementById('zt-com').value;
-  if(!c)return;
-  const raw=ztDB[r][p][c];
-  const asterisco=raw.includes('*');
-  const zona=raw.replace('*','');
-  document.getElementById('zt-zona-letra').textContent=zona;
-  document.getElementById('zt-zona-nombre').textContent='Zona Térmica '+zona+' — '+c;
-  document.getElementById('zt-warning').style.display=asterisco?'block':'none';
-  const d=ztCoef[zona];
-  document.getElementById('zt-u-tech').textContent=d.tech[0];document.getElementById('zt-rt-tech').textContent=d.tech[1];document.getElementById('zt-r100-tech').textContent=Math.round(d.tech[1]*40)+' mm';
-  document.getElementById('zt-u-muro').textContent=d.muro[0];document.getElementById('zt-rt-muro').textContent=d.muro[1];document.getElementById('zt-r100-muro').textContent=Math.round(d.muro[1]*40)+' mm';
-  document.getElementById('zt-u-piso').textContent=d.piso[0];document.getElementById('zt-rt-piso').textContent=d.piso[1];document.getElementById('zt-r100-piso').textContent=Math.round(d.piso[1]*40)+' mm';
-  document.getElementById('zt-u-puerta').textContent=d.puerta[0];document.getElementById('zt-rt-puerta').textContent=d.puerta[1];document.getElementById('zt-r100-puerta').textContent=d.puerta[1]==='—'?'No regulado':'Estructural';
-  document.getElementById('zt-results').style.display='block';
-}
+function ztActualizarProvincias(){const r=document.getElementById('zt-reg').value;const sp=document.getElementById('zt-prov');const sc=document.getElementById('zt-com');sp.innerHTML='<option value="">— Seleccione provincia —</option>';sc.innerHTML='<option value="">— Seleccione comuna —</option>';sc.disabled=true;document.getElementById('zt-results').style.display='none';document.getElementById('zt-warning').style.display='none';if(r){sp.disabled=false;for(let p in ztDB[r]){const o=document.createElement('option');o.value=p;o.textContent=p;sp.appendChild(o);}}else sp.disabled=true;}
+function ztActualizarComunas(){const r=document.getElementById('zt-reg').value;const p=document.getElementById('zt-prov').value;const sc=document.getElementById('zt-com');sc.innerHTML='<option value="">— Seleccione comuna —</option>';document.getElementById('zt-results').style.display='none';document.getElementById('zt-warning').style.display='none';if(p){sc.disabled=false;for(let c in ztDB[r][p]){const o=document.createElement('option');o.value=c;o.textContent=c;sc.appendChild(o);}}else sc.disabled=true;}
+function ztMostrarResultados(){const r=document.getElementById('zt-reg').value;const p=document.getElementById('zt-prov').value;const c=document.getElementById('zt-com').value;if(!c)return;const raw=ztDB[r][p][c];const asterisco=raw.includes('*');const zona=raw.replace('*','');document.getElementById('zt-zona-letra').textContent=zona;document.getElementById('zt-zona-nombre').textContent='Zona Térmica '+zona+' — '+c;document.getElementById('zt-warning').style.display=asterisco?'block':'none';const d=ztCoef[zona];document.getElementById('zt-u-tech').textContent=d.tech[0];document.getElementById('zt-rt-tech').textContent=d.tech[1];document.getElementById('zt-r100-tech').textContent=Math.round(d.tech[1]*40)+' mm';document.getElementById('zt-u-muro').textContent=d.muro[0];document.getElementById('zt-rt-muro').textContent=d.muro[1];document.getElementById('zt-r100-muro').textContent=Math.round(d.muro[1]*40)+' mm';document.getElementById('zt-u-piso').textContent=d.piso[0];document.getElementById('zt-rt-piso').textContent=d.piso[1];document.getElementById('zt-r100-piso').textContent=Math.round(d.piso[1]*40)+' mm';document.getElementById('zt-u-puerta').textContent=d.puerta[0];document.getElementById('zt-rt-puerta').textContent=d.puerta[1];document.getElementById('zt-r100-puerta').textContent=d.puerta[1]==='—'?'No regulado':'Estructural';document.getElementById('zt-results').style.display='block';}
 
-/* ── WIZARD ── */
-const stepperVals={pisos:1,dormitorios:3,banos:2};
-let currentStep=1;
-const totalSteps=3;
-const comunasPorRegion={araucania:['Angol','Collipulli','Curacautín','Ercilla','Lonquimay','Los Sauces','Lumaco','Purén','Renaico','Traiguén','Victoria','Temuco','Lautaro','Villarrica','Pucón','Nueva Imperial'],biobio:['Concepción','Los Ángeles','Chillán','San Pedro de la Paz','Hualpén','Talcahuano','Coronel','Lota','Lebu','Arauco','Cañete','Tirúa','Nacimiento','Mulchén','Negrete','Quilaco'],'los-rios':['Valdivia','La Unión','Río Bueno','Lago Ranco','Futrono','Panguipulli','Los Lagos','Máfil','Mariquina','Lanco','Corral'],'los-lagos':['Puerto Montt','Osorno','Castro','Ancud','Calbuco','Puerto Varas','Frutillar','Llanquihue','Chaitén'],maule:['Talca','Curicó','Linares','Constitución','San Javier','Cauquenes','Parral','Molina'],metropolitana:['Santiago','Maipú','La Florida','Pudahuel','Quilicura','Puente Alto','San Bernardo','Providencia','Las Condes'],otra:['Otra comuna']};
-const trasladoInfo={araucania:{texto:'Zona de cobertura principal. Sin costo adicional de traslado para comunas del radio de Angol.',extra:false},biobio:{texto:'Región del Biobío: se evaluará viático según distancia específica a la comuna.',extra:true},'los-rios':{texto:'Región Los Ríos: traslado con viático incluido en presupuesto.',extra:true},'los-lagos':{texto:'Región Los Lagos: traslado con viático y estadía si corresponde.',extra:true},maule:{texto:'Región del Maule: traslado con viático según distancia.',extra:true},metropolitana:{texto:'Región Metropolitana: proyectos remotos, se coordinará modalidad de trabajo.',extra:true},otra:{texto:'Fuera del área habitual: se coordinará traslado y viáticos de forma personalizada.',extra:true}};
+/* ══ CONFIGURADOR ══ */
+const COMUNAS_MALLECO=['Angol','Collipulli','Curacautín','Ercilla','Lonquimay','Los Sauces','Lumaco','Purén','Renaico','Traiguén','Victoria'];
+const TODAS_COMUNAS=['Angol','Arauco','Bulnes','Cabrero','Cañete','Carahue','Castro','Chillán','Chillán Viejo','Cholchol','Collipulli','Concepción','Contulmo','Coronel','Curacautín','Ercilla','Freire','Frutillar','Gorbea','Hualpén','Hualqui','Laja','Lanco','Lautaro','Lebu','Lonquimay','Loncoche','Los Ángeles','Los Lagos','Los Sauces','Lota','Lumaco','Melipeuco','Mulchén','Nacimiento','Negrete','Nueva Imperial','Osorno','Padre Las Casas','Penco','Perquenco','Pitrufquén','Pucón','Puerto Montt','Puerto Varas','Purén','Purranque','Renaico','San Carlos','San Pedro de la Paz','Santa Bárbara','Santa Juana','Talcahuano','Temuco','Tirúa','Toltén','Tomé','Traiguén','Valdivia','Victoria','Villarrica','Yumbel','Otra'];
+const FLOWS={obras:{label:'Diseño / Ampliación / Regularización',steps:[{id:'tipo',q:'¿Qué necesitas?',opts:['Obra nueva','Ampliación','Regularización Ley 20.898','Remodelación interior','Recepción final','No estoy seguro']},{id:'zona',q:'¿La propiedad está en zona urbana o rural?',opts:['Urbana','Rural','No sé']},{id:'metros',q:'¿Cuántos metros cuadrados aproximados?',opts:['Menos de 50 m²','50 – 140 m²','140 – 250 m²','Más de 250 m²']},{id:'construida',q:'¿La vivienda ya está construida?',opts:['Sí','Parcialmente','No']},{id:'comuna',q:'Comuna del proyecto',type:'select'},{id:'docs',q:'¿Tienes estos antecedentes?',type:'check',opts:['Rol','Plano existente','Escritura','Certificado de avalúo','Fotografías','Ninguno']}],result:(ans)=>{const tipo=ans.tipo||'proyecto';const zona=ans.zona||'';let srv,desc,plazo,hono,docs;if(tipo==='Regularización Ley 20.898'){srv='Regularización Ley 20.898';desc=`Regularización de vivienda existente en zona ${zona.toLowerCase()}. Este trámite permite obtener la recepción municipal de construcciones sin permiso previo.`;plazo='3 – 6 meses';hono='Según superficie y complejidad';docs=['Rol de avalúo (SII)','Escritura de la propiedad','Fotografías del inmueble','Certificado de número municipal'];}else if(tipo==='Obra nueva'){srv='Proyecto de Obra Nueva';desc=`Diseño y gestión completa de vivienda nueva en zona ${zona.toLowerCase()} de ${ans.metros||'—'}.`;plazo='4 – 8 meses';hono='Desde UF 15 + IVA';docs=['Escritura o compromiso','Plano de ubicación','Certificado de informaciones previas DOM'];}else if(tipo==='Ampliación'){srv='Proyecto de Ampliación';desc=`Ampliación en zona ${zona.toLowerCase()}. Incluye diseño y tramitación de permiso de edificación.`;plazo='2 – 5 meses';hono='Según superficie';docs=['Planos existentes (si los hay)','Rol SII','Escritura','Recepción final original'];}else{srv=tipo||'Servicio de Arquitectura';desc=`Según los datos ingresados: ${tipo} en zona ${zona.toLowerCase()}.`;plazo='A confirmar en consulta';hono='A cotizar según alcance';docs=['Documentos específicos según caso'];}return{srv,desc,plazo,hono,docs,warn:zona==='Rural'?'Los proyectos rurales pueden requerir coordinación con SAG, Municipalidad y Conservador de Bienes Raíces.':''};},waMsg:(ans,n)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${n}\n*Servicio:* ${ans.tipo||'—'}\n*Zona:* ${ans.zona||'—'}\n*Superficie:* ${ans.metros||'—'}\n*Estado:* ${ans.construida||'—'}\n*Comuna:* ${ans.comuna||'—'}\n*Antecedentes:* ${ans.docs?.join(', ')||'Ninguno'}\n\nQuedo a disposición.`},
+subdivision:{label:'Subdivisiones y Loteos',steps:[{id:'tramite',q:'Tipo de trámite',opts:['Subdivisión rural','Subdivisión urbana','Fusión predial','Loteo','Saneamiento','No estoy seguro']},{id:'superficie',q:'¿Cuál es la superficie del terreno?',opts:['Menos de 5.000 m²','5.000 m² – 1 ha','Más de 1 ha']},{id:'topo',q:'¿Existe levantamiento topográfico?',opts:['Sí','No','No sé']},{id:'necesita',q:'¿Qué necesitas?',type:'check',opts:['Plano SAG','Plano DOM','Rol nuevo SII','Cambio de destino','Apertura de caminos','Todo el proceso']},{id:'comuna',q:'Comuna del predio',type:'select'}],result:(ans)=>({srv:ans.tramite||'Subdivisión',desc:`${ans.tramite||'Subdivisión'} para terreno de ${ans.superficie||'—'}. Incluye coordinación con organismos públicos según el tipo de trámite.`,plazo:ans.tramite?.includes('rural')?'4 – 8 meses':'3 – 6 meses',hono:'A cotizar según complejidad',docs:['Escritura del predio','Rol de avalúo SII','Plano de emplazamiento'],warn:'Los servicios rurales pueden requerir coordinación con SAG, Conservador, SII y Municipalidad.'}),waMsg:(ans,n)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${n}\n*Trámite:* ${ans.tramite||'—'}\n*Superficie:* ${ans.superficie||'—'}\n*Topografía:* ${ans.topo||'—'}\n*Requiere:* ${ans.necesita?.join(', ')||'—'}\n*Comuna:* ${ans.comuna||'—'}\n\nQuedo a disposición.`},
+tasacion:{label:'Tasaciones',steps:[{id:'tipo',q:'Tipo de propiedad',opts:['Casa','Parcela','Sitio','Local comercial','Terreno agrícola','Departamento']},{id:'motivo',q:'¿Motivo de la tasación?',opts:['Venta','Compra','Juicio','Banco / Hipotecaria','Herencia','Referencial']},{id:'comuna',q:'Comuna donde se ubica la propiedad',type:'select'},{id:'recepcion',q:'¿Existe recepción municipal?',opts:['Sí','No','Parcial','No sé']}],result:(ans)=>{const motivo=ans.motivo||'';let tipo='Tasación comercial simple';if(motivo==='Banco / Hipotecaria')tipo='Tasación bancaria';else if(motivo==='Juicio')tipo='Informe técnico pericial';return{srv:tipo,desc:`Valoración profesional de ${(ans.tipo||'propiedad').toLowerCase()} para ${(motivo||'referencia').toLowerCase()}.`,plazo:'5 – 10 días hábiles',hono:'Según tipo y ubicación',docs:['Escritura','Rol SII','Planos (si existen)','Recepción final municipal'],warn:ans.recepcion==='No'?'Sin recepción municipal puede haber restricciones para tasación bancaria. Se recomienda regularización previa.':''};},waMsg:(ans,n)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${n}\n*Servicio:* Tasación\n*Tipo:* ${ans.tipo||'—'}\n*Motivo:* ${ans.motivo||'—'}\n*Comuna:* ${ans.comuna||'—'}\n*Recepción:* ${ans.recepcion||'—'}\n\nQuedo a disposición.`},
+termico:{label:'Informes Térmicos y CEV',steps:[{id:'tipo',q:'¿Qué necesitas?',opts:['Informe térmico DOM','Evaluación Energética CEV','Modelación térmica','Análisis de condensación','Puentes térmicos','Asesoría eficiencia energética']},{id:'proyecto',q:'Tipo de proyecto',opts:['Vivienda nueva','Vivienda existente','Sala cuna / edificio público','Proyecto DS49','Otro']},{id:'materialidad',q:'Materialidad principal',opts:['Albañilería','Metalcon','Madera','Hormigón','Mixto']},{id:'docs',q:'¿Posees?',type:'check',opts:['Planos DWG / PDF','Modelo Archicad / Revit / IFC','Especificaciones técnicas','Detalles constructivos','Ninguno']},{id:'comuna',q:'Comuna del proyecto (para zona climática automática)',type:'select'}],result:(ans)=>({srv:ans.tipo||'Informe térmico',desc:`${ans.tipo||'Informe'} para ${(ans.proyecto||'proyecto').toLowerCase()} con materialidad ${(ans.materialidad||'—').toLowerCase()}.`,plazo:ans.tipo?.includes('CEV')?'5 – 10 días hábiles':'3 – 7 días hábiles',hono:'Según superficie y complejidad',docs:['Planos de arquitectura (PDF o DWG)','Especificaciones técnicas','Detalles constructivos'],warn:'La evaluación energética CEV agrega valor comercial a propiedades existentes y es exigida por DOM en viviendas nuevas.'}),waMsg:(ans,n)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${n}\n*Servicio:* ${ans.tipo||'—'}\n*Proyecto:* ${ans.proyecto||'—'}\n*Materialidad:* ${ans.materialidad||'—'}\n*Docs disponibles:* ${ans.docs?.join(', ')||'Ninguna'}\n*Comuna:* ${ans.comuna||'—'}\n\nQuedo a disposición.`},
+construccion:{label:'Construcción y Electricidad',steps:[{id:'servicio',q:'Servicio requerido',opts:['Construcción menor','Remodelación','Techumbre','Instalación eléctrica','Aumento de capacidad','Certificación TE1','Reparación']},{id:'inmueble',q:'Tipo de inmueble',opts:['Vivienda','Local comercial','Oficina','Parcela']},{id:'zona',q:'Tipo de zona',opts:['Urbana','Rural']},{id:'comuna',q:'Comuna del proyecto',type:'select',malleco:true}],result:(ans)=>{const esMalleco=COMUNAS_MALLECO.includes(ans.comuna);if(!esMalleco&&ans.comuna)return{srv:'Servicio no disponible en esta ubicación',desc:'Actualmente el servicio de Construcción y Electricidad está disponible solo dentro de la Provincia de Malleco.',plazo:'—',hono:'—',docs:[],warn:'Para proyectos fuera de Malleco, consulte los otros servicios de arquitectura.'};return{srv:ans.servicio||'Construcción y Electricidad',desc:`${ans.servicio||'Servicio'} en ${ans.zona?.toLowerCase()||'zona'} — ${ans.inmueble?.toLowerCase()||'inmueble'}. Provincia de Malleco.`,plazo:'A definir según proyecto',hono:'A cotizar en visita técnica',docs:['Plano de la propiedad (si existe)','Rol SII'],warn:''};},waMsg:(ans,n)=>`Hola José Luis, le contacto desde arquiterm.cl.\n\n*Nombre:* ${n}\n*Servicio:* ${ans.servicio||'—'}\n*Inmueble:* ${ans.inmueble||'—'}\n*Zona:* ${ans.zona||'—'}\n*Comuna:* ${ans.comuna||'—'}\n\nQuedo a disposición.`}};
 
-function filtrarComunas(){const region=document.getElementById('sel-region').value;const sel=document.getElementById('sel-comuna');sel.innerHTML='<option value="">— Seleccione comuna —</option>';if(region&&comunasPorRegion[region]){comunasPorRegion[region].forEach(c=>{const o=document.createElement('option');o.value=c.toLowerCase().replace(/ /g,'-');o.textContent=c;sel.appendChild(o);});sel.disabled=false;const info=trasladoInfo[region];const div=document.getElementById('traslado-info');div.style.display='block';div.innerHTML='<strong>'+(info.extra?'⚠ Nota traslado:':'✓ Cobertura:')+'</strong> '+info.texto;div.style.borderLeftColor=info.extra?'#e67e22':'#2ecc71';div.style.background=info.extra?'rgba(240,160,96,.08)':'rgba(46,204,113,.08)';div.style.color=info.extra?'#b7550a':'#1a7a3c';}else{sel.disabled=true;document.getElementById('traslado-info').style.display='none';}}
-function selectRadio(el,group){document.querySelectorAll('[onclick*="\''+group+'\'"]').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');}
-function stepperChange(field,delta){const min=1,max=field==='pisos'?4:10;stepperVals[field]=Math.max(min,Math.min(max,stepperVals[field]+delta));document.getElementById('val-'+field).textContent=stepperVals[field];}
-function updateBudget(val){const n=parseInt(val);document.getElementById('budget-display').textContent=n>=10000?'UF 10.000+':'UF '+n.toLocaleString('es-CL');}
-function handleServicioChange(){const val=document.getElementById('sel-servicio').value;['cond-obras','cond-regularizacion','cond-tasacion','cond-especialidades'].forEach(id=>document.getElementById(id).classList.remove('visible'));if(val==='obras-nuevas')document.getElementById('cond-obras').classList.add('visible');else if(val==='regularizacion')document.getElementById('cond-regularizacion').classList.add('visible');else if(val==='tasacion')document.getElementById('cond-tasacion').classList.add('visible');else if(val==='especialidades')document.getElementById('cond-especialidades').classList.add('visible');}
-function updateProgress(step){for(let i=1;i<=4;i++){const dot=document.getElementById('pdot-'+i);dot.classList.remove('active','done');if(i<step)dot.classList.add('done');else if(i===step)dot.classList.add('active');}for(let i=1;i<=3;i++){const line=document.getElementById('pline-'+i);if(line)line.classList.toggle('done',i<step);}}
-function wizardNext(){if(currentStep<totalSteps){document.getElementById('step-'+currentStep).classList.remove('active');currentStep++;document.getElementById('step-'+currentStep).classList.add('active');updateProgress(currentStep);document.getElementById('step-count').textContent='Paso '+currentStep+' de '+totalSteps;document.getElementById('btn-back').style.visibility='visible';if(currentStep===totalSteps){document.getElementById('btn-next').textContent='Ver pre-factibilidad →';document.getElementById('btn-next').classList.add('wbtn-submit');document.getElementById('btn-next').classList.remove('wbtn-next');}}else{showResult();}}
-function wizardBack(){if(currentStep>1){document.getElementById('step-'+currentStep).classList.remove('active');currentStep--;document.getElementById('step-'+currentStep).classList.add('active');updateProgress(currentStep);document.getElementById('step-count').textContent='Paso '+currentStep+' de '+totalSteps;document.getElementById('btn-next').textContent='Siguiente →';document.getElementById('btn-next').classList.remove('wbtn-submit');document.getElementById('btn-next').classList.add('wbtn-next');if(currentStep===1)document.getElementById('btn-back').style.visibility='hidden';}}
-function showResult(){document.getElementById('step-'+currentStep).classList.remove('active');document.getElementById('wizard-result').classList.add('visible');document.getElementById('wizard-nav').style.display='none';updateProgress(4);const region=document.getElementById('sel-region');const comuna=document.getElementById('sel-comuna');const servicio=document.getElementById('sel-servicio');const zonaSelected=document.querySelector('[onclick*="\'zona\'"].selected');const urgenciaSelected=document.querySelector('[onclick*="\'urgencia\'"].selected');const planosSelected=document.querySelector('[onclick*="\'planos\'"].selected');let s='';s+='<strong>📍 Ubicación:</strong> '+(comuna.options[comuna.selectedIndex]?.text||'—')+', '+(region.options[region.selectedIndex]?.text||'—')+'<br>';s+='<strong>🏷 Zona:</strong> '+(zonaSelected?.textContent||'—')+'<br>';s+='<strong>🔧 Servicio:</strong> '+(servicio.options[servicio.selectedIndex]?.text||'—')+'<br>';if(servicio.value==='obras-nuevas'){s+='<strong>🏠 Programa:</strong> '+stepperVals.pisos+' piso(s), '+stepperVals.dormitorios+' dorm., '+stepperVals.banos+' baño(s)<br>';const budget=document.getElementById('budget-display')?.textContent;if(budget)s+='<strong>💰 Presupuesto:</strong> '+budget+'<br>';}if(urgenciaSelected)s+='<strong>⏱ Urgencia:</strong> '+urgenciaSelected.textContent+'<br>';if(planosSelected)s+='<strong>📄 Documentación:</strong> '+planosSelected.textContent;document.getElementById('summary-box').innerHTML=s;setTimeout(()=>{document.getElementById('result-calculating').style.display='none';document.getElementById('result-spinner').style.display='none';document.getElementById('result-form').style.display='block';},2000);}
-function submitFinal(){const nombre=document.getElementById('res-nombre').value.trim();const wa=document.getElementById('res-whatsapp').value.trim();if(!nombre||!wa){alert('Por favor ingrese su nombre y WhatsApp.');return;}const region=document.getElementById('sel-region');const comuna=document.getElementById('sel-comuna');const servicio=document.getElementById('sel-servicio');const zonaSelected=document.querySelector('[onclick*="\'zona\'"].selected');const urgenciaSelected=document.querySelector('[onclick*="\'urgencia\'"].selected');const planosSelected=document.querySelector('[onclick*="\'planos\'"].selected');const descripcion=document.getElementById('txt-descripcion')?.value?.trim();const emailOpt=document.getElementById('res-email')?.value?.trim();let msg='Hola José Luis, le contacto desde *arquiterm.cl*:\n\n';msg+='*Nombre:* '+nombre+'\n*Teléfono:* '+wa+'\n';if(emailOpt)msg+='*Email:* '+emailOpt+'\n';msg+='\n*📍 Ubicación:* '+(comuna.options[comuna.selectedIndex]?.text||'—')+', '+(region.options[region.selectedIndex]?.text||'—')+'\n';if(zonaSelected)msg+='*🏷 Zona:* '+zonaSelected.textContent+'\n';msg+='*🔧 Servicio:* '+(servicio.options[servicio.selectedIndex]?.text||'—')+'\n';if(servicio.value==='obras-nuevas'){msg+='*🏠 Programa:* '+stepperVals.pisos+' piso(s), '+stepperVals.dormitorios+' dorm., '+stepperVals.banos+' baño(s)\n';const budget=document.getElementById('budget-display')?.textContent;if(budget)msg+='*💰 Presupuesto:* '+budget+'\n';}if(urgenciaSelected)msg+='*⏱ Urgencia:* '+urgenciaSelected.textContent+'\n';if(planosSelected)msg+='*📄 Docs:* '+planosSelected.textContent+'\n';if(descripcion)msg+='\n*Descripción:* '+descripcion+'\n';document.getElementById('result-form').style.display='none';document.getElementById('result-success').classList.add('visible');setTimeout(()=>{window.open('https://wa.me/56998772218?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer');},800);}
+let currentFlow=null,currentStepIdx=0,answers={};
+function selectService(key){currentFlow=key;currentStepIdx=0;answers={};document.getElementById('svc-selector').style.display='none';document.querySelectorAll('.svc-tile').forEach(t=>t.classList.remove('active'));document.querySelector('[onclick="selectService(\''+key+'\')"]').classList.add('active');buildProgress();document.getElementById('cfg-progress-bar').style.display='block';document.getElementById('cfg-body').style.display='block';document.getElementById('cfg-nav').style.display='flex';document.getElementById('cfg-result').style.display='none';renderStep();}
+function buildProgress(){const steps=FLOWS[currentFlow].steps;const c=document.getElementById('cfg-prog-steps');c.innerHTML='';steps.forEach((s,i)=>{const dot=document.createElement('div');dot.className='cfg-prog-step';dot.innerHTML=`<div class="cfg-prog-dot" id="cpd-${i}">${i+1}</div>${i<steps.length-1?'<div class="cfg-prog-line" id="cpl-'+i+'"></div>':''}`;c.appendChild(dot);});updateProgress();}
+function updateProgress(){const steps=FLOWS[currentFlow].steps;steps.forEach((_,i)=>{const d=document.getElementById('cpd-'+i);if(!d)return;d.classList.remove('act','done');if(i<currentStepIdx)d.classList.add('done');else if(i===currentStepIdx)d.classList.add('act');if(i<steps.length-1){const l=document.getElementById('cpl-'+i);if(l)l.classList.toggle('done',i<currentStepIdx);}});document.getElementById('cfg-step-count').textContent=`Paso ${currentStepIdx+1} de ${FLOWS[currentFlow].steps.length}`;document.getElementById('cfg-btn-back').style.visibility=currentStepIdx===0?'hidden':'visible';const isLast=currentStepIdx===FLOWS[currentFlow].steps.length-1;document.getElementById('cfg-btn-next').textContent=isLast?'Ver resultado →':'Siguiente →';document.getElementById('cfg-btn-next').className='cfg-btn '+(isLast?'cfg-btn-gold':'cfg-btn-next');}
+function renderStep(){const step=FLOWS[currentFlow].steps[currentStepIdx];const body=document.getElementById('cfg-body');let html=`<div class="cfg-step active"><div class="cfg-qlabel">Paso ${currentStepIdx+1}</div><div class="cfg-qtitle">${step.q}</div>`;if(step.type==='select'){const comunas=step.malleco?COMUNAS_MALLECO:TODAS_COMUNAS;html+=`<select class="cfg-select" id="step-input" onchange="setAnswer('${step.id}',this.value)"><option value="">— Seleccione comuna —</option>${comunas.map(c=>`<option value="${c}"${answers[step.id]===c?' selected':''}>${c}</option>`).join('')}</select>`;if(step.malleco)html+=`<div class="cfg-info">⚑ Este servicio está disponible actualmente solo en la Provincia de Malleco.</div>`;}else if(step.type==='check'){const sel=answers[step.id]||[];html+=`<div class="cfg-check-grid">${step.opts.map(o=>`<div class="cfg-check${sel.includes(o)?' sel':''}" onclick="toggleCheck('${step.id}','${o}',this)"><div class="cfg-check-box">${sel.includes(o)?'✓':''}</div>${o}</div>`).join('')}</div>`;}else{html+=`<div class="cfg-options">${step.opts.map(o=>`<div class="cfg-opt${answers[step.id]===o?' sel':''}" onclick="setAnswer('${step.id}','${o}',this)"><div class="cfg-opt-dot"></div>${o}</div>`).join('')}</div>`;}html+=`</div>`;body.innerHTML=html;}
+function setAnswer(id,val,el){answers[id]=val;if(el){document.querySelectorAll('.cfg-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');}}
+function toggleCheck(id,val,el){if(!answers[id])answers[id]=[];const idx=answers[id].indexOf(val);if(idx>-1){answers[id].splice(idx,1);el.classList.remove('sel');el.querySelector('.cfg-check-box').textContent='';}else{answers[id].push(val);el.classList.add('sel');el.querySelector('.cfg-check-box').textContent='✓';}}
+function cfgNext(){const steps=FLOWS[currentFlow].steps;if(currentStepIdx<steps.length-1){currentStepIdx++;updateProgress();renderStep();}else{showResult();}}
+function cfgBack(){if(currentStepIdx>0){currentStepIdx--;updateProgress();renderStep();}else{document.getElementById('svc-selector').style.display='block';document.getElementById('cfg-progress-bar').style.display='none';document.getElementById('cfg-body').style.display='none';document.getElementById('cfg-nav').style.display='none';document.getElementById('cfg-result').style.display='none';currentFlow=null;}}
+function showResult(){document.getElementById('cfg-body').style.display='none';document.getElementById('cfg-nav').style.display='none';document.getElementById('cfg-result').style.display='block';document.getElementById('cfg-spinner').style.display='block';document.getElementById('cfg-result-content').style.display='none';document.getElementById('cfg-success').classList.remove('visible');setTimeout(()=>{document.getElementById('cfg-spinner').style.display='none';const r=FLOWS[currentFlow].result(answers);document.getElementById('res-service-label').textContent=FLOWS[currentFlow].label;document.getElementById('res-title').textContent='Servicio recomendado: '+r.srv;document.getElementById('res-desc').textContent=r.desc;document.getElementById('res-grid').innerHTML=`<div class="cfg-res-card"><div class="cfg-res-card-label">Plazo estimado</div><div class="cfg-res-card-val">${r.plazo}</div></div><div class="cfg-res-card"><div class="cfg-res-card-label">Honorarios</div><div class="cfg-res-card-val">${r.hono}</div></div><div class="cfg-res-card"><div class="cfg-res-card-label">Estado</div><div class="cfg-res-card-val">Consulta gratuita</div></div>`;let docsHtml=`<strong>Documentos sugeridos:</strong>${r.docs.map(d=>`<br>— ${d}`).join('')}`;if(r.warn)docsHtml+=`<div class="cfg-warn" style="margin-top:.8rem;margin-bottom:0">⚠ ${r.warn}</div>`;document.getElementById('res-docs').innerHTML=docsHtml;document.getElementById('cfg-result-content').style.display='block';},1800);}
+function cfgSubmit(){const nombre=document.getElementById('res-nombre').value.trim();const wa=document.getElementById('res-wa').value.trim();if(!nombre||!wa){alert('Por favor ingrese su nombre y WhatsApp.');return;}document.getElementById('cfg-result-content').style.display='none';document.getElementById('cfg-success').classList.add('visible');const msg=FLOWS[currentFlow].waMsg(answers,nombre);setTimeout(()=>{window.open('https://wa.me/56998772218?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer');},700);}
 
-/* ── CONTACT FORM ── */
+/* ══ CONTACT FORM ══ */
 (function(){const form=document.getElementById('contact-form');if(!form)return;form.addEventListener('submit',async function(e){e.preventDefault();const btn=document.getElementById('cf-submit');const ok=document.getElementById('cf-success');const err=document.getElementById('cf-error');btn.textContent='Enviando...';btn.disabled=true;ok.style.display='none';err.style.display='none';try{const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});if(res.ok){form.reset();ok.style.display='block';btn.style.display='none';}else{err.style.display='block';btn.textContent='Enviar consulta';btn.disabled=false;}}catch(e){err.style.display='block';btn.textContent='Enviar consulta';btn.disabled=false;}});})();
 </script>
 </body>
